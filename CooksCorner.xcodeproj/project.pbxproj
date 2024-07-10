@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E2A1AE5C2C3E51EF00EC863A /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5B2C3E51EF00EC863A /* RegistrationView.swift */; };
+		E2A1AE5E2C3E634000EC863A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5D2C3E634000EC863A /* RegistrationViewController.swift */; };
+		E2A1AE602C3E64FF00EC863A /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5F2C3E64FF00EC863A /* RegistrationViewModel.swift */; };
+		E2A1AE622C3EB51500EC863A /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE612C3EB51500EC863A /* AlertView.swift */; };
 		E2C1294D2C3C22D600058C2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1294C2C3C22D600058C2C /* AppDelegate.swift */; };
 		E2C1294F2C3C22D600058C2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1294E2C3C22D600058C2C /* SceneDelegate.swift */; };
 		E2C129512C3C22D600058C2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C129502C3C22D600058C2C /* ViewController.swift */; };
@@ -32,6 +36,10 @@
 		0577770D4B73161AF4BBE247 /* Pods-CooksCorner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooksCorner.release.xcconfig"; path = "Target Support Files/Pods-CooksCorner/Pods-CooksCorner.release.xcconfig"; sourceTree = "<group>"; };
 		A5E0775CC97834A8A677E860 /* Pods_CooksCorner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooksCorner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE2795BCADF8083CF3A05093 /* Pods-CooksCorner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooksCorner.debug.xcconfig"; path = "Target Support Files/Pods-CooksCorner/Pods-CooksCorner.debug.xcconfig"; sourceTree = "<group>"; };
+		E2A1AE5B2C3E51EF00EC863A /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		E2A1AE5D2C3E634000EC863A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		E2A1AE5F2C3E64FF00EC863A /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		E2A1AE612C3EB51500EC863A /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		E2C129492C3C22D600058C2C /* CooksCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CooksCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C1294C2C3C22D600058C2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2C1294E2C3C22D600058C2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +91,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E2A1AE5A2C3E51D000EC863A /* RegistrationScreen */ = {
+			isa = PBXGroup;
+			children = (
+				E2A1AE5B2C3E51EF00EC863A /* RegistrationView.swift */,
+				E2A1AE5D2C3E634000EC863A /* RegistrationViewController.swift */,
+				E2A1AE5F2C3E64FF00EC863A /* RegistrationViewModel.swift */,
+			);
+			path = RegistrationScreen;
+			sourceTree = "<group>";
+		};
 		E2C129402C3C22D600058C2C = {
 			isa = PBXGroup;
 			children = (
@@ -105,8 +123,9 @@
 		E2C1294B2C3C22D600058C2C /* CooksCorner */ = {
 			isa = PBXGroup;
 			children = (
-				E2C129712C3C428300058C2C /* LoginScreen */,
 				E2C129632C3C236D00058C2C /* SplashScreen */,
+				E2C129712C3C428300058C2C /* LoginScreen */,
+				E2A1AE5A2C3E51D000EC863A /* RegistrationScreen */,
 				E2C129602C3C22EA00058C2C /* Support */,
 				E2C1295A2C3C22D800058C2C /* Info.plist */,
 			);
@@ -171,6 +190,7 @@
 			children = (
 				E2C129732C3C42A600058C2C /* CustomTextField.swift */,
 				E2C1297B2C3D2C3D00058C2C /* CustomTextFieldView.swift */,
+				E2A1AE612C3EB51500EC863A /* AlertView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -296,13 +316,17 @@
 				E2C129512C3C22D600058C2C /* ViewController.swift in Sources */,
 				E2C1294D2C3C22D600058C2C /* AppDelegate.swift in Sources */,
 				E2C1297A2C3C430300058C2C /* LoginViewModel.swift in Sources */,
+				E2A1AE5C2C3E51EF00EC863A /* RegistrationView.swift in Sources */,
+				E2A1AE5E2C3E634000EC863A /* RegistrationViewController.swift in Sources */,
 				E2C1296A2C3C3D7700058C2C /* Extension.swift in Sources */,
 				E2C129762C3C42BD00058C2C /* LoginView.swift in Sources */,
 				E2C1294F2C3C22D600058C2C /* SceneDelegate.swift in Sources */,
 				E2C129742C3C42A600058C2C /* CustomTextField.swift in Sources */,
 				E2C129652C3C238300058C2C /* SplashScreenViewController.swift in Sources */,
+				E2A1AE602C3E64FF00EC863A /* RegistrationViewModel.swift in Sources */,
 				E2C129622C3C236700058C2C /* SplashScreenView.swift in Sources */,
 				E2C129782C3C42D400058C2C /* LoginViewController.swift in Sources */,
+				E2A1AE622C3EB51500EC863A /* AlertView.swift in Sources */,
 				E2C129672C3C3D2800058C2C /* Constants.swift in Sources */,
 				E2C1297C2C3D2C3D00058C2C /* CustomTextFieldView.swift in Sources */,
 			);

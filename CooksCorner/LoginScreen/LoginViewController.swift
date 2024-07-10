@@ -17,14 +17,14 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupTargets()
+        setupTargets()
 //        bindModel()
     }
     
-//    private func setupTargets() {
-//        contentView.loginButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
-//        contentView.registerButton.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
-//    }
+    private func setupTargets() {
+        contentView.signInButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
+        contentView.registerButton.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
+    }
 //    
 //    private func bindModel() {
 //        viewModel.showAlert = { [weak self] message in
@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
 //        }
 //    }
 //    
-//    @objc func loginTapped() {
+    @objc func loginTapped() {
 //        viewModel.validateCredentials(
 //            username: contentView.loginTextField.text,
 //            password: contentView.passwordTextField.text
@@ -43,10 +43,10 @@ class LoginViewController: UIViewController {
 //                self?.navigationController?.pushViewController(homeViewController, animated: true)
 //            }
 //        }
-//    }
-//    
-//    @objc func registerTapped() {
-//        let registrationViewController = RegistrationViewController()
-//        navigationController?.pushViewController(registrationViewController, animated: true)
-//    }
+    }
+    
+    @objc func registerTapped() {
+        let registrationViewController = RegistrationViewController()
+        navigationController?.pushViewController(registrationViewController, animated: true)
+    }
 }

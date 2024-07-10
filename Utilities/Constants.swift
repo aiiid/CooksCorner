@@ -23,7 +23,7 @@ class Constants {
     }
     
     struct Size {
-        static let textFieldHeight: CGFloat = 50
+        static let textFieldHeight: CGFloat = 45
         static let mainTextWidth = 250
     }
     
@@ -31,7 +31,6 @@ class Constants {
         static let regular = UIFont(name: "Poppins-Regular", size: 24)!
         static let light = UIFont(name: "Poppins-Light", size: 24)!
         static let bold = UIFont(name: "Poppins-Bold", size: 24)!
-        
         static let small = UIFont(name: "Poppins-Regular", size: 14)!
     }
     
@@ -39,5 +38,6 @@ class Constants {
         static let welcomeMessage = "Welcome Back\nTo CooksCorner !"
         static let signInButton = "Sign In"
         static let registerButton = "I don’t have an account? Sign Up Now"
+        static let registrationMessage = "Sign up for delicious Discoveries!"
     }
 }

@@ -18,13 +18,13 @@ class CustomTextField: UITextField {
         return button
     }()
     
-    init(placeholder: String, isPasswordField: Bool = false) {
+    init(placeholder: String, isPasswordField: Bool = false, icon: String?) {
         super.init(frame: .zero)
         self.placeholder = placeholder
         self.isSecureTextEntry = isPasswordField
         self.textContentType = isPasswordField ? .oneTimeCode : .none
-        
-        configureTextField(isPasswordField: isPasswordField)
+
+        configureTextField(isPasswordField: isPasswordField, icon: icon)
         disableSmartFeatures()
     }
     
@@ -32,19 +32,24 @@ class CustomTextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureTextField(isPasswordField: Bool) {
+    private func configureTextField(isPasswordField: Bool, icon: String?) {
         configurePlaceholder()
         styleTextField()
         addPadding()
         
         if isPasswordField {
             configurePasswordField()
+        } else {
+            if let icon = icon {
+                configureIcon(with: icon)
+            }
         }
     }
     
     private func configurePlaceholder() {
         let placeholderAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.lightGray
+            .foregroundColor: UIColor.lightGray,
+            .font: Constants.Fonts.small
         ]
         attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: placeholderAttributes)
     }
@@ -52,7 +57,7 @@ class CustomTextField: UITextField {
     private func styleTextField() {
         borderStyle = .none
         backgroundColor = UIColor.systemGray6
-        layer.cornerRadius = 10
+        layer.cornerRadius = 23
         layer.masksToBounds = true
     }
     
@@ -60,6 +65,21 @@ class CustomTextField: UITextField {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         leftView = paddingView
         leftViewMode = .always
+    }
+    
+    private func configureIcon(with icon: String) {
+        let rightIcon = UIImageView(image: UIImage(systemName: icon))
+        rightIcon.tintColor = Constants.Colors.gray
+        
+        let rightPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
+        
+        containerView.addSubview(rightPaddingView)
+        containerView.addSubview(rightIcon)
+        setupConstraints(for: rightPaddingView, and: rightIcon, in: containerView)
+        
+        rightView = containerView
+        rightViewMode = .always
     }
     
     private func configurePasswordField() {
@@ -77,9 +97,11 @@ class CustomTextField: UITextField {
         rightViewMode = .always
     }
     
+    
+    
     private func setupConstraints(
         for rightPaddingView: UIView,
-        and eyeButton: UIButton,
+        and eyeButton: UIView,
         in containerView: UIView
     ) {
         rightPaddingView.snp.makeConstraints { make in

@@ -17,8 +17,8 @@ class CustomTextFieldView: UIView {
     
     let textField: CustomTextField
     
-    init(titleText: String, placeholder: String, isPasswordField: Bool = false) {
-        self.textField = CustomTextField(placeholder: placeholder, isPasswordField: isPasswordField)
+    init(titleText: String, placeholder: String, isPasswordField: Bool = false, icon: String?) {
+        self.textField = CustomTextField(placeholder: placeholder, isPasswordField: isPasswordField, icon: icon)
         super.init(frame: .zero)
         
         titleLabel.text = titleText
