@@ -25,6 +25,7 @@ class Constants {
     struct Size {
         static let textFieldHeight: CGFloat = 45
         static let mainTextWidth = 250
+        static let cornerRadius = 23
     }
     
     struct Fonts {

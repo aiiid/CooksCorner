@@ -7,6 +7,20 @@
 
 import UIKit
 
+protocol Reusable: AnyObject {
+    static var reuseIdentifier: String { get }
+}
+
+extension Reusable {
+    static var reuseIdentifier: String {
+        return String(describing: self)
+    }
+}
+extension UICollectionViewCell: Reusable {}
+extension UITableViewHeaderFooterView: Reusable {}
+extension UITableViewCell: Reusable {}
+extension UICollectionReusableView: Reusable {}
+
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)

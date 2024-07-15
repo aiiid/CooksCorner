@@ -57,7 +57,7 @@ class CustomTextField: UITextField {
     private func styleTextField() {
         borderStyle = .none
         backgroundColor = UIColor.systemGray6
-        layer.cornerRadius = 23
+        layer.cornerRadius = CGFloat(Constants.Size.cornerRadius)
         layer.masksToBounds = true
     }
     

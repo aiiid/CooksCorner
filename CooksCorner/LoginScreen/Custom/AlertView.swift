@@ -15,7 +15,7 @@ class AlertView: UIView {
         message.translatesAutoresizingMaskIntoConstraints = false
         message.textColor = .red
         message.textAlignment = .center
-        message.font = Constants.Fonts.regular
+        message.font = Constants.Fonts.small
         return message
     }()
     
@@ -32,7 +32,7 @@ class AlertView: UIView {
         backgroundColor = .white
         layer.borderColor = UIColor.red.cgColor
         layer.borderWidth = 1.0
-        layer.cornerRadius = 8.0
+        layer.cornerRadius = CGFloat(Constants.Size.cornerRadius)
         layer.masksToBounds = true
         
         addSubview(messageLabel)

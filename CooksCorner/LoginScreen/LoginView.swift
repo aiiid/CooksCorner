@@ -53,7 +53,7 @@ class LoginView: UIView {
         button.setTitle("Sign in", for: .normal)
         button.tintColor = .white
         button.backgroundColor = Constants.Colors.primary
-        button.layer.cornerRadius = 23
+        button.layer.cornerRadius = CGFloat(Constants.Size.cornerRadius)
         return button
     }()
     
@@ -126,7 +126,6 @@ class LoginView: UIView {
             make.centerY.equalToSuperview()
             make.width.equalTo(Constants.Size.mainTextWidth)
         }
-        
     }
     
     private func configureLoginContainer() {

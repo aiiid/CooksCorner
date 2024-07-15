@@ -74,7 +74,7 @@ class RegistrationView: UIView {
         button.setTitle("Sign up", for: .normal)
         button.tintColor = .white
         button.backgroundColor = Constants.Colors.primary
-        button.layer.cornerRadius = 23
+        button.layer.cornerRadius = CGFloat(Constants.Size.cornerRadius)
         return button
     }()
     
@@ -114,7 +114,9 @@ class RegistrationView: UIView {
         addSubview(headerContainer)
         addSubview(registerStackView)
         addSubview(registerButton)
+        addSubview(alertView)
         
+        configureAlert()
         configureHeaderContainer()
         configureRegisterContainer()
         
@@ -137,7 +139,7 @@ class RegistrationView: UIView {
             make.height.equalTo(Constants.Size.textFieldHeight)
         }
     }
-    
+ 
     private func configureHeaderContainer() {
         headerContainer.addSubview(mainText)
         headerContainer.backgroundColor = Constants.Colors.primary
@@ -185,7 +187,7 @@ extension RegistrationView {
 
 extension RegistrationView {
     private func configureAlert() {
-        addSubview(alertView)
+        alertView.isHidden = true
         
         alertView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(Constants.Padding.small)
@@ -195,7 +197,7 @@ extension RegistrationView {
     }
     
     func showAlert(message: String) {
-        configureAlert()
+        alertView.isHidden = false
         alertView.setMessage(message)
         
         layoutIfNeeded()

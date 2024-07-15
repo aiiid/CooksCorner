@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E291692F2C41410200E3861D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291692E2C41410200E3861D /* HomeViewController.swift */; };
+		E29169312C41412100E3861D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169302C41412100E3861D /* SearchViewController.swift */; };
+		E29169332C41413300E3861D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169322C41413300E3861D /* ProfileViewController.swift */; };
+		E29169352C41415400E3861D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169342C41415400E3861D /* TabBarController.swift */; };
+		E29169372C41467F00E3861D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169362C41467F00E3861D /* HomeView.swift */; };
+		E291693A2C41493E00E3861D /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169392C41493E00E3861D /* RecipeCell.swift */; };
+		E291693C2C414B9800E3861D /* RecipeStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291693B2C414B9700E3861D /* RecipeStatsView.swift */; };
+		E291693E2C414E7300E3861D /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291693D2C414E7300E3861D /* RecipeModel.swift */; };
+		E29169402C415BD700E3861D /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291693F2C415BD700E3861D /* HeaderView.swift */; };
+		E29169422C43E72B00E3861D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169412C43E72B00E3861D /* HomeViewModel.swift */; };
+		E29169442C43FA4900E3861D /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169432C43FA4900E3861D /* BaseView.swift */; };
+		E29169462C43FC6900E3861D /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169452C43FC6900E3861D /* CategoryCell.swift */; };
 		E2A1AE5C2C3E51EF00EC863A /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5B2C3E51EF00EC863A /* RegistrationView.swift */; };
 		E2A1AE5E2C3E634000EC863A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5D2C3E634000EC863A /* RegistrationViewController.swift */; };
 		E2A1AE602C3E64FF00EC863A /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5F2C3E64FF00EC863A /* RegistrationViewModel.swift */; };
@@ -36,6 +48,18 @@
 		0577770D4B73161AF4BBE247 /* Pods-CooksCorner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooksCorner.release.xcconfig"; path = "Target Support Files/Pods-CooksCorner/Pods-CooksCorner.release.xcconfig"; sourceTree = "<group>"; };
 		A5E0775CC97834A8A677E860 /* Pods_CooksCorner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CooksCorner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE2795BCADF8083CF3A05093 /* Pods-CooksCorner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CooksCorner.debug.xcconfig"; path = "Target Support Files/Pods-CooksCorner/Pods-CooksCorner.debug.xcconfig"; sourceTree = "<group>"; };
+		E291692E2C41410200E3861D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		E29169302C41412100E3861D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E29169322C41413300E3861D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E29169342C41415400E3861D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		E29169362C41467F00E3861D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E29169392C41493E00E3861D /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
+		E291693B2C414B9700E3861D /* RecipeStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStatsView.swift; sourceTree = "<group>"; };
+		E291693D2C414E7300E3861D /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
+		E291693F2C415BD700E3861D /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		E29169412C43E72B00E3861D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E29169432C43FA4900E3861D /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		E29169452C43FC6900E3861D /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		E2A1AE5B2C3E51EF00EC863A /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		E2A1AE5D2C3E634000EC863A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		E2A1AE5F2C3E64FF00EC863A /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
@@ -91,6 +115,46 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E291692B2C4140CD00E3861D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E29169382C41492500E3861D /* CollectionView */,
+				E291692E2C41410200E3861D /* HomeViewController.swift */,
+				E29169452C43FC6900E3861D /* CategoryCell.swift */,
+				E29169362C41467F00E3861D /* HomeView.swift */,
+				E291693D2C414E7300E3861D /* RecipeModel.swift */,
+				E29169412C43E72B00E3861D /* HomeViewModel.swift */,
+				E29169432C43FA4900E3861D /* BaseView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E291692C2C4140E300E3861D /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E29169302C41412100E3861D /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		E291692D2C4140EF00E3861D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E29169322C41413300E3861D /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		E29169382C41492500E3861D /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				E29169392C41493E00E3861D /* RecipeCell.swift */,
+				E291693B2C414B9700E3861D /* RecipeStatsView.swift */,
+				E291693F2C415BD700E3861D /* HeaderView.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
 		E2A1AE5A2C3E51D000EC863A /* RegistrationScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +190,9 @@
 				E2C129632C3C236D00058C2C /* SplashScreen */,
 				E2C129712C3C428300058C2C /* LoginScreen */,
 				E2A1AE5A2C3E51D000EC863A /* RegistrationScreen */,
+				E291692B2C4140CD00E3861D /* Home */,
+				E291692C2C4140E300E3861D /* Search */,
+				E291692D2C4140EF00E3861D /* Profile */,
 				E2C129602C3C22EA00058C2C /* Support */,
 				E2C1295A2C3C22D800058C2C /* Info.plist */,
 			);
@@ -138,6 +205,7 @@
 				E2C1294C2C3C22D600058C2C /* AppDelegate.swift */,
 				E2C1294E2C3C22D600058C2C /* SceneDelegate.swift */,
 				E2C129502C3C22D600058C2C /* ViewController.swift */,
+				E29169342C41415400E3861D /* TabBarController.swift */,
 				E2C129552C3C22D800058C2C /* Assets.xcassets */,
 			);
 			path = Support;
@@ -316,15 +384,27 @@
 				E2C129512C3C22D600058C2C /* ViewController.swift in Sources */,
 				E2C1294D2C3C22D600058C2C /* AppDelegate.swift in Sources */,
 				E2C1297A2C3C430300058C2C /* LoginViewModel.swift in Sources */,
+				E29169462C43FC6900E3861D /* CategoryCell.swift in Sources */,
+				E291692F2C41410200E3861D /* HomeViewController.swift in Sources */,
 				E2A1AE5C2C3E51EF00EC863A /* RegistrationView.swift in Sources */,
+				E291693E2C414E7300E3861D /* RecipeModel.swift in Sources */,
+				E29169442C43FA4900E3861D /* BaseView.swift in Sources */,
 				E2A1AE5E2C3E634000EC863A /* RegistrationViewController.swift in Sources */,
 				E2C1296A2C3C3D7700058C2C /* Extension.swift in Sources */,
 				E2C129762C3C42BD00058C2C /* LoginView.swift in Sources */,
 				E2C1294F2C3C22D600058C2C /* SceneDelegate.swift in Sources */,
+				E29169332C41413300E3861D /* ProfileViewController.swift in Sources */,
 				E2C129742C3C42A600058C2C /* CustomTextField.swift in Sources */,
+				E291693C2C414B9800E3861D /* RecipeStatsView.swift in Sources */,
 				E2C129652C3C238300058C2C /* SplashScreenViewController.swift in Sources */,
 				E2A1AE602C3E64FF00EC863A /* RegistrationViewModel.swift in Sources */,
+				E29169402C415BD700E3861D /* HeaderView.swift in Sources */,
+				E29169352C41415400E3861D /* TabBarController.swift in Sources */,
+				E29169312C41412100E3861D /* SearchViewController.swift in Sources */,
+				E29169372C41467F00E3861D /* HomeView.swift in Sources */,
 				E2C129622C3C236700058C2C /* SplashScreenView.swift in Sources */,
+				E291693A2C41493E00E3861D /* RecipeCell.swift in Sources */,
+				E29169422C43E72B00E3861D /* HomeViewModel.swift in Sources */,
 				E2C129782C3C42D400058C2C /* LoginViewController.swift in Sources */,
 				E2A1AE622C3EB51500EC863A /* AlertView.swift in Sources */,
 				E2C129672C3C3D2800058C2C /* Constants.swift in Sources */,
