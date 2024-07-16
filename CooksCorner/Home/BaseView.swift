@@ -10,8 +10,12 @@ import SnapKit
 
 class BaseView: UIView {
     lazy var headerContainer = UIView()
+    
     lazy var mainCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: UICollectionViewLayout()
+        )
         collectionView.backgroundColor = .systemBackground
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         return collectionView

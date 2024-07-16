@@ -11,20 +11,21 @@ class RecipeStatsView: UIView {
     private let iconStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 5
+        stackView.spacing = 10
         return stackView
     }()
     
     private let heartIcon: UIImageView = {
         let image = UIImageView(image: UIImage(systemName: "heart"))
         image.tintColor = .white
+        image.contentMode = .scaleAspectFit
         return image
     }()
     
     private let likedLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = Constants.Fonts.regular
+        label.font = Constants.Fonts.small
         label.textAlignment = .left
         return label
     }()
@@ -32,13 +33,14 @@ class RecipeStatsView: UIView {
     private let saveIcon: UIImageView = {
         let image = UIImageView(image: UIImage(systemName: "bookmark"))
         image.tintColor = .white
+        image.contentMode = .scaleAspectFit
         return image
     }()
     
     private let savedLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = Constants.Fonts.regular
+        label.font = Constants.Fonts.small
         label.textAlignment = .left
         return label
     }()
@@ -53,10 +55,19 @@ class RecipeStatsView: UIView {
     }
     
     private func setupView() {
-        [heartIcon, likedLabel, saveIcon, savedLabel].forEach { iconStack.addSubview($0) }
+        addSubview(iconStack)
+        heartIcon.snp.makeConstraints { make in
+            make.height.width.equalTo(12)
+        }
+        saveIcon.snp.makeConstraints { make in
+            make.height.width.equalTo(12)
+        }
+        [heartIcon, likedLabel, saveIcon, savedLabel].forEach { iconStack.addArrangedSubview($0) }
         
         iconStack.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview()
         }
 
     }

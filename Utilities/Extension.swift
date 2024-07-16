@@ -16,7 +16,7 @@ extension Reusable {
         return String(describing: self)
     }
 }
-extension UICollectionViewCell: Reusable {}
+
 extension UITableViewHeaderFooterView: Reusable {}
 extension UITableViewCell: Reusable {}
 extension UICollectionReusableView: Reusable {}

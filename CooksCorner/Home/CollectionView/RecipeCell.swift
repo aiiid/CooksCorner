@@ -1,76 +1,108 @@
+//
+//  RecipeCell.swift
+//  CooksCorner
+//
+//  Created by Ai Hawok on 12/07/2024.
+//
+
+//import SDWebImage
 import UIKit
-import SnapKit
 
 class RecipeCell: UICollectionViewCell {
-    static let reuseIdentifier = "RecipeCell"
     
-    private let thumbnailImageView = UIImageView()
-    private let nameLabel = UILabel()
-    private let authorLabel = UILabel()
-    private let likesLabel = UILabel()
-    private let savesLabel = UILabel()
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 10
+        return imageView
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private let authorLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private let contentStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 5
+        return stackView
+    }()
+    
+    private let recipeStats = RecipeStatsView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setupViews()
-        setupLayout()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupViews() {
-        thumbnailImageView.contentMode = .scaleAspectFill
-        thumbnailImageView.clipsToBounds = true
-        contentView.addSubview(thumbnailImageView)
+    private func setupView() {
+        backgroundColor = .systemPink
+        addSubview(imageView)
+//        addSubview(titleLabel)
+//        addSubview(authorLabel)
+//        addSubview(recipeStats)
+        addSubview(contentStack)
         
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        contentView.addSubview(nameLabel)
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        contentStack.addArrangedSubview(titleLabel)
+        contentStack.addArrangedSubview(authorLabel)
+        contentStack.addArrangedSubview(recipeStats)
         
-        authorLabel.font = UIFont.systemFont(ofSize: 14)
-        contentView.addSubview(authorLabel)
-        
-        likesLabel.font = UIFont.systemFont(ofSize: 14)
-        contentView.addSubview(likesLabel)
-        
-        savesLabel.font = UIFont.systemFont(ofSize: 14)
-        contentView.addSubview(savesLabel)
+        recipeStats.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.height.equalTo(20)
+        }
+        contentStack.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+        }
+//        titleLabel.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview().offset(Constants.Padding.medium)
+//            make.leading.equalToSuperview().offset(Constants.Padding.medium)
+//        }
+//        
+//        authorLabel.snp.makeConstraints { make in
+//            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.Padding.small)
+//        }
+//        
+//        recipeStats.snp.makeConstraints { make in
+//            make.leading.trailing.equalToSuperview()
+//            make.top.equalTo(authorLabel.snp.bottom).offset(Constants.Padding.medium)
+//            make.bottom.equalToSuperview()
+//        }
     }
     
-    private func setupLayout() {
-        thumbnailImageView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(contentView.frame.width)
-        }
-        
-        nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(thumbnailImageView.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(8)
-        }
-        
-        authorLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview().inset(8)
-        }
-        
-        likesLabel.snp.makeConstraints { make in
-            make.top.equalTo(authorLabel.snp.bottom).offset(4)
-            make.leading.equalToSuperview().inset(8)
-        }
-        
-        savesLabel.snp.makeConstraints { make in
-            make.top.equalTo(authorLabel.snp.bottom).offset(4)
-            make.trailing.equalToSuperview().inset(8)
-        }
-    }
-    
-    func configure(with recipe: RecipeModel) {
-        thumbnailImageView.image = UIImage(named: recipe.thumbnail)
-        nameLabel.text = recipe.name
-        authorLabel.text = "by \(recipe.author)"
-        likesLabel.text = "Likes: \(recipe.likes)"
-        savesLabel.text = "Saves: \(recipe.saves)"
+    public func configure(with recipe: RecipeModel) {
+        titleLabel.text = recipe.name
+        authorLabel.text = recipe.author
+        recipeStats.configure(likes: recipe.likes, saves: recipe.saves)
+        imageView.image = UIImage(named: recipe.thumbnail)
+//
+//        if let imageURL = URL(string: recipe.thumbnail) {
+////            imageView.sd_setImage(with: imageURL, completed: nil)
+//            print("should be")
+//        } else {
+//            imageView.image = nil // Set a placeholder image if needed
+//        }
     }
 }
