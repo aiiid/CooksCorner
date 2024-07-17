@@ -44,19 +44,12 @@ class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController {
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let sectionLayoutKind = Section.allCases[indexPath.section]
-        switch sectionLayoutKind {
-        case .foodCategories:
-            return
-        case .foodRecipes:
-            let detailVC = RecipeDetailViewController(recipe: viewModel.recipes[indexPath.row])
-            navigationController?.pushViewController(detailVC, animated: true)
-        }
+extension HomeViewController: CategoryRecipeCellDelegate {
+    func didSelectRecipe(_ recipe: RecipeModel) {
+        let detailVC = RecipeDetailViewController(recipe: recipe)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
-
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -105,6 +98,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 return UICollectionViewCell()
             }
             let category = viewModel.categories[indexPath.row]
+            cell.delegate = self // Set the delegate
             cell.configure(with: category)
             return cell
         }

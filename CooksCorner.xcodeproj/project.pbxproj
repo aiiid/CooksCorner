@@ -22,6 +22,7 @@
 		E29169482C47BC8300E3861D /* CategoryNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169472C47BC8300E3861D /* CategoryNameCell.swift */; };
 		E291694E2C47D6C000E3861D /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291694D2C47D6C000E3861D /* RecipeDetailView.swift */; };
 		E29169502C47D6DE00E3861D /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291694F2C47D6DE00E3861D /* RecipeDetailViewController.swift */; };
+		E29169522C47E3C400E3861D /* BasicStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169512C47E3C400E3861D /* BasicStyleCell.swift */; };
 		E2A1AE5C2C3E51EF00EC863A /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5B2C3E51EF00EC863A /* RegistrationView.swift */; };
 		E2A1AE5E2C3E634000EC863A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5D2C3E634000EC863A /* RegistrationViewController.swift */; };
 		E2A1AE602C3E64FF00EC863A /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5F2C3E64FF00EC863A /* RegistrationViewModel.swift */; };
@@ -66,6 +67,7 @@
 		E29169472C47BC8300E3861D /* CategoryNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNameCell.swift; sourceTree = "<group>"; };
 		E291694D2C47D6C000E3861D /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		E291694F2C47D6DE00E3861D /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
+		E29169512C47E3C400E3861D /* BasicStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicStyleCell.swift; sourceTree = "<group>"; };
 		E2A1AE5B2C3E51EF00EC863A /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		E2A1AE5D2C3E634000EC863A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		E2A1AE5F2C3E64FF00EC863A /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				E291694D2C47D6C000E3861D /* RecipeDetailView.swift */,
 				E291694F2C47D6DE00E3861D /* RecipeDetailViewController.swift */,
+				E29169512C47E3C400E3861D /* BasicStyleCell.swift */,
 			);
 			path = RecipeDetails;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 			files = (
 				E2C129512C3C22D600058C2C /* ViewController.swift in Sources */,
 				E291694E2C47D6C000E3861D /* RecipeDetailView.swift in Sources */,
+				E29169522C47E3C400E3861D /* BasicStyleCell.swift in Sources */,
 				E2C1294D2C3C22D600058C2C /* AppDelegate.swift in Sources */,
 				E2C1297A2C3C430300058C2C /* LoginViewModel.swift in Sources */,
 				E29169462C43FC6900E3861D /* CategoryRecipeCell.swift in Sources */,

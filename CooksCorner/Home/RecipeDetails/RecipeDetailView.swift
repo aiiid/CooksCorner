@@ -6,7 +6,6 @@
 //
 import UIKit
 import SnapKit
-//import SDWebImage
 
 class RecipeDetailView: UIView {
     
@@ -19,11 +18,11 @@ class RecipeDetailView: UIView {
     }()
     
     let gradientLayer: CAGradientLayer = {
-            let layer = CAGradientLayer()
-            layer.colors = [UIColor.black.withAlphaComponent(0.7).cgColor, UIColor.clear.cgColor]
-            layer.locations = [0.0, 1.0]
-            return layer
-        }()
+        let layer = CAGradientLayer()
+        layer.colors = [UIColor.black.withAlphaComponent(0.7).cgColor, UIColor.clear.cgColor]
+        layer.locations = [0.0, 1.0]
+        return layer
+    }()
     
     let infoView: UIView = {
         let view = UIView()
@@ -108,7 +107,7 @@ class RecipeDetailView: UIView {
         return text
     }()
     
-    let ingridientsTableView: UITableView = {
+    let ingredientsTableView: UITableView = {
         let tableView = UITableView()
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
@@ -126,15 +125,8 @@ class RecipeDetailView: UIView {
     
     func set(recipe: RecipeModel) {
         titleText.text = recipe.name
-        descriptionText.text = recipe.name + "decsriptiion should go here"
+        descriptionText.text = recipe.name + " description should go here"
         mainImage.image = UIImage(named: recipe.thumbnail)
-//        locationText.text = tour.location
-//        
-//        if let imageURL = URL(string: tour.thumbnail) {
-//            mainImage.sd_setImage(with: imageURL, completed: nil)
-//        } else {
-//            mainImage.image = nil // Set a placeholder image if needed
-//        }
     }
     
     private func setupView() {
@@ -167,16 +159,16 @@ class RecipeDetailView: UIView {
     }
     
     private func setupInfoView() {
-        [timeIcon, timeText].forEach { timeStack.addArrangedSubview($0)}
-        [titleText, timeStack].forEach { titleStack.addArrangedSubview($0)}
-        [descriptionLabel, descriptionText].forEach { descriptionStack.addArrangedSubview($0)}
+        [timeIcon, timeText].forEach { timeStack.addArrangedSubview($0) }
+        [titleText, timeStack].forEach { titleStack.addArrangedSubview($0) }
+        [descriptionLabel, descriptionText].forEach { descriptionStack.addArrangedSubview($0) }
         
         [
             titleStack,
             timeStack,
             descriptionStack,
             reviewsLabel,
-            ingridientsTableView
+            ingredientsTableView
         ].forEach { infoView.addSubview($0) }
         
         descriptionText.snp.makeConstraints { make in
@@ -197,7 +189,6 @@ class RecipeDetailView: UIView {
         timeStack.snp.makeConstraints { make in
             make.top.equalTo(titleStack.snp.bottom).offset(12)
             make.leading.equalToSuperview().inset(16)
-            
         }
         
         descriptionStack.snp.makeConstraints { make in
@@ -210,7 +201,7 @@ class RecipeDetailView: UIView {
             make.leading.trailing.equalToSuperview().inset(16)
         }
         
-        ingridientsTableView.snp.makeConstraints { make in
+        ingredientsTableView.snp.makeConstraints { make in
             make.top.equalTo(reviewsLabel.snp.bottom).offset(12)
             make.leading.trailing.bottom.equalToSuperview().inset(16)
         }
