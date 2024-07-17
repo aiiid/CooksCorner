@@ -14,14 +14,14 @@ class RecipeCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 10
+        imageView.layer.cornerRadius = CGFloat(Constants.Size.cornerRadius/2)
         return imageView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = Constants.Fonts.recipeTitle
         label.textAlignment = .left
         return label
     }()
@@ -29,7 +29,7 @@ class RecipeCell: UICollectionViewCell {
     private let authorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = Constants.Fonts.small
         label.textAlignment = .left
         return label
     }()
@@ -37,7 +37,7 @@ class RecipeCell: UICollectionViewCell {
     private let contentStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 5
+        stackView.spacing = 3
         return stackView
     }()
     
@@ -53,11 +53,7 @@ class RecipeCell: UICollectionViewCell {
     }
     
     private func setupView() {
-        backgroundColor = .systemPink
         addSubview(imageView)
-//        addSubview(titleLabel)
-//        addSubview(authorLabel)
-//        addSubview(recipeStats)
         addSubview(contentStack)
         
         imageView.snp.makeConstraints { make in
@@ -70,26 +66,13 @@ class RecipeCell: UICollectionViewCell {
         recipeStats.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.height.equalTo(20)
+            make.width.equalTo(30)
         }
         contentStack.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(Constants.Padding.medium/2)
+            make.leading.equalToSuperview().inset(Constants.Padding.small/2)
+            make.trailing.equalToSuperview().inset(Constants.Padding.large)
         }
-//        titleLabel.snp.makeConstraints { make in
-//            make.centerY.equalToSuperview().offset(Constants.Padding.medium)
-//            make.leading.equalToSuperview().offset(Constants.Padding.medium)
-//        }
-//        
-//        authorLabel.snp.makeConstraints { make in
-//            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.Padding.small)
-//        }
-//        
-//        recipeStats.snp.makeConstraints { make in
-//            make.leading.trailing.equalToSuperview()
-//            make.top.equalTo(authorLabel.snp.bottom).offset(Constants.Padding.medium)
-//            make.bottom.equalToSuperview()
-//        }
     }
     
     public func configure(with recipe: RecipeModel) {

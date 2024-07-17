@@ -26,7 +26,7 @@ class BaseView: UIView {
         label.numberOfLines = 0
         label.textColor = .white
         
-        let fullText = "Hi, Sarthak! UI Designer & Cook"
+        let fullText = "Hi, Sarthak! \nUI Designer & Cook"
         let attributedString = NSMutableAttributedString(
             string: fullText,
             attributes: [NSAttributedString.Key.font: Constants.Fonts.regular]
@@ -80,8 +80,8 @@ class BaseView: UIView {
         )
         
         mainCollectionView.register(
-            CategoryCell.self,
-            forCellWithReuseIdentifier: CategoryCell.reuseIdentifier
+            CategoryRecipeCell.self,
+            forCellWithReuseIdentifier: CategoryRecipeCell.reuseIdentifier
         )
         
         mainCollectionView.register(

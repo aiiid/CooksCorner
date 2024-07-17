@@ -11,7 +11,9 @@ class RecipeStatsView: UIView {
     private let iconStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 10
+        stackView.spacing = 2
+        stackView.alignment = .leading
+        stackView.distribution = .equalSpacing
         return stackView
     }()
     
@@ -56,20 +58,18 @@ class RecipeStatsView: UIView {
     
     private func setupView() {
         addSubview(iconStack)
-        heartIcon.snp.makeConstraints { make in
-            make.height.width.equalTo(12)
-        }
-        saveIcon.snp.makeConstraints { make in
-            make.height.width.equalTo(12)
-        }
         [heartIcon, likedLabel, saveIcon, savedLabel].forEach { iconStack.addArrangedSubview($0) }
         
-        iconStack.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview()
+        heartIcon.snp.makeConstraints { make in
+            make.height.width.equalTo(28)
         }
-
+        saveIcon.snp.makeConstraints { make in
+            make.height.width.equalTo(28)
+        }
+        
+        iconStack.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     func configure(likes: Int, saves: Int) {

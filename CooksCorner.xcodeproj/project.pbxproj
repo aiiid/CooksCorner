@@ -18,7 +18,10 @@
 		E29169402C415BD700E3861D /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291693F2C415BD700E3861D /* HeaderView.swift */; };
 		E29169422C43E72B00E3861D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169412C43E72B00E3861D /* HomeViewModel.swift */; };
 		E29169442C43FA4900E3861D /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169432C43FA4900E3861D /* BaseView.swift */; };
-		E29169462C43FC6900E3861D /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169452C43FC6900E3861D /* CategoryCell.swift */; };
+		E29169462C43FC6900E3861D /* CategoryRecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169452C43FC6900E3861D /* CategoryRecipeCell.swift */; };
+		E29169482C47BC8300E3861D /* CategoryNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29169472C47BC8300E3861D /* CategoryNameCell.swift */; };
+		E291694E2C47D6C000E3861D /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291694D2C47D6C000E3861D /* RecipeDetailView.swift */; };
+		E29169502C47D6DE00E3861D /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291694F2C47D6DE00E3861D /* RecipeDetailViewController.swift */; };
 		E2A1AE5C2C3E51EF00EC863A /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5B2C3E51EF00EC863A /* RegistrationView.swift */; };
 		E2A1AE5E2C3E634000EC863A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5D2C3E634000EC863A /* RegistrationViewController.swift */; };
 		E2A1AE602C3E64FF00EC863A /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1AE5F2C3E64FF00EC863A /* RegistrationViewModel.swift */; };
@@ -59,7 +62,10 @@
 		E291693F2C415BD700E3861D /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		E29169412C43E72B00E3861D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E29169432C43FA4900E3861D /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
-		E29169452C43FC6900E3861D /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		E29169452C43FC6900E3861D /* CategoryRecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRecipeCell.swift; sourceTree = "<group>"; };
+		E29169472C47BC8300E3861D /* CategoryNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNameCell.swift; sourceTree = "<group>"; };
+		E291694D2C47D6C000E3861D /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		E291694F2C47D6DE00E3861D /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
 		E2A1AE5B2C3E51EF00EC863A /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		E2A1AE5D2C3E634000EC863A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		E2A1AE5F2C3E64FF00EC863A /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
@@ -118,13 +124,8 @@
 		E291692B2C4140CD00E3861D /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				E29169382C41492500E3861D /* CollectionView */,
-				E291692E2C41410200E3861D /* HomeViewController.swift */,
-				E29169452C43FC6900E3861D /* CategoryCell.swift */,
-				E29169362C41467F00E3861D /* HomeView.swift */,
-				E291693D2C414E7300E3861D /* RecipeModel.swift */,
-				E29169412C43E72B00E3861D /* HomeViewModel.swift */,
-				E29169432C43FA4900E3861D /* BaseView.swift */,
+				E291694B2C47D67900E3861D /* HomeAllRecipes */,
+				E291694C2C47D68E00E3861D /* RecipeDetails */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -148,11 +149,51 @@
 		E29169382C41492500E3861D /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				E29169392C41493E00E3861D /* RecipeCell.swift */,
-				E291693B2C414B9700E3861D /* RecipeStatsView.swift */,
-				E291693F2C415BD700E3861D /* HeaderView.swift */,
+				E291694A2C47C4C000E3861D /* Category */,
+				E29169492C47C4B700E3861D /* Recipe */,
 			);
 			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		E29169492C47C4B700E3861D /* Recipe */ = {
+			isa = PBXGroup;
+			children = (
+				E29169392C41493E00E3861D /* RecipeCell.swift */,
+				E291693B2C414B9700E3861D /* RecipeStatsView.swift */,
+				E291693D2C414E7300E3861D /* RecipeModel.swift */,
+			);
+			path = Recipe;
+			sourceTree = "<group>";
+		};
+		E291694A2C47C4C000E3861D /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				E291693F2C415BD700E3861D /* HeaderView.swift */,
+				E29169452C43FC6900E3861D /* CategoryRecipeCell.swift */,
+				E29169472C47BC8300E3861D /* CategoryNameCell.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		E291694B2C47D67900E3861D /* HomeAllRecipes */ = {
+			isa = PBXGroup;
+			children = (
+				E29169382C41492500E3861D /* CollectionView */,
+				E29169432C43FA4900E3861D /* BaseView.swift */,
+				E29169362C41467F00E3861D /* HomeView.swift */,
+				E29169412C43E72B00E3861D /* HomeViewModel.swift */,
+				E291692E2C41410200E3861D /* HomeViewController.swift */,
+			);
+			path = HomeAllRecipes;
+			sourceTree = "<group>";
+		};
+		E291694C2C47D68E00E3861D /* RecipeDetails */ = {
+			isa = PBXGroup;
+			children = (
+				E291694D2C47D6C000E3861D /* RecipeDetailView.swift */,
+				E291694F2C47D6DE00E3861D /* RecipeDetailViewController.swift */,
+			);
+			path = RecipeDetails;
 			sourceTree = "<group>";
 		};
 		E2A1AE5A2C3E51D000EC863A /* RegistrationScreen */ = {
@@ -190,6 +231,7 @@
 				E2C129632C3C236D00058C2C /* SplashScreen */,
 				E2C129712C3C428300058C2C /* LoginScreen */,
 				E2A1AE5A2C3E51D000EC863A /* RegistrationScreen */,
+				E29169342C41415400E3861D /* TabBarController.swift */,
 				E291692B2C4140CD00E3861D /* Home */,
 				E291692C2C4140E300E3861D /* Search */,
 				E291692D2C4140EF00E3861D /* Profile */,
@@ -205,7 +247,6 @@
 				E2C1294C2C3C22D600058C2C /* AppDelegate.swift */,
 				E2C1294E2C3C22D600058C2C /* SceneDelegate.swift */,
 				E2C129502C3C22D600058C2C /* ViewController.swift */,
-				E29169342C41415400E3861D /* TabBarController.swift */,
 				E2C129552C3C22D800058C2C /* Assets.xcassets */,
 			);
 			path = Support;
@@ -382,9 +423,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2C129512C3C22D600058C2C /* ViewController.swift in Sources */,
+				E291694E2C47D6C000E3861D /* RecipeDetailView.swift in Sources */,
 				E2C1294D2C3C22D600058C2C /* AppDelegate.swift in Sources */,
 				E2C1297A2C3C430300058C2C /* LoginViewModel.swift in Sources */,
-				E29169462C43FC6900E3861D /* CategoryCell.swift in Sources */,
+				E29169462C43FC6900E3861D /* CategoryRecipeCell.swift in Sources */,
 				E291692F2C41410200E3861D /* HomeViewController.swift in Sources */,
 				E2A1AE5C2C3E51EF00EC863A /* RegistrationView.swift in Sources */,
 				E291693E2C414E7300E3861D /* RecipeModel.swift in Sources */,
@@ -396,6 +438,7 @@
 				E29169332C41413300E3861D /* ProfileViewController.swift in Sources */,
 				E2C129742C3C42A600058C2C /* CustomTextField.swift in Sources */,
 				E291693C2C414B9800E3861D /* RecipeStatsView.swift in Sources */,
+				E29169502C47D6DE00E3861D /* RecipeDetailViewController.swift in Sources */,
 				E2C129652C3C238300058C2C /* SplashScreenViewController.swift in Sources */,
 				E2A1AE602C3E64FF00EC863A /* RegistrationViewModel.swift in Sources */,
 				E29169402C415BD700E3861D /* HeaderView.swift in Sources */,
@@ -404,6 +447,7 @@
 				E29169372C41467F00E3861D /* HomeView.swift in Sources */,
 				E2C129622C3C236700058C2C /* SplashScreenView.swift in Sources */,
 				E291693A2C41493E00E3861D /* RecipeCell.swift in Sources */,
+				E29169482C47BC8300E3861D /* CategoryNameCell.swift in Sources */,
 				E29169422C43E72B00E3861D /* HomeViewModel.swift in Sources */,
 				E2C129782C3C42D400058C2C /* LoginViewController.swift in Sources */,
 				E2A1AE622C3EB51500EC863A /* AlertView.swift in Sources */,

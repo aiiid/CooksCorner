@@ -11,6 +11,9 @@ class HomeViewModel {
     let categories: [CategoryModel] = [
         CategoryModel(name: "Breakfast", recipes: [
             RecipeModel(name: "Egg Omlet", author: "Ainsley Harriott", thumbnail: "placeholder.jpg", likes: 118, saves: 118),
+            RecipeModel(name: "Pancakes", author: "Jamie Oliver", thumbnail: "placeholder.jpg", likes: 200, saves: 150),
+            RecipeModel(name: "Pancakes", author: "Jamie Oliver", thumbnail: "placeholder.jpg", likes: 200, saves: 150),
+            RecipeModel(name: "Pancakes", author: "Jamie Oliver", thumbnail: "placeholder.jpg", likes: 200, saves: 150),
             RecipeModel(name: "Pancakes", author: "Jamie Oliver", thumbnail: "placeholder.jpg", likes: 200, saves: 150)
         ]),
         CategoryModel(name: "Lunch", recipes: [

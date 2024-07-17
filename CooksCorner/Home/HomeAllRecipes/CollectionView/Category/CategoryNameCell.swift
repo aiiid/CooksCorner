@@ -1,18 +1,22 @@
 //
-//  CategoryCell.swift
+//  CategoryNameCell.swift
 //  CooksCorner
 //
-//  Created by Ai Hawok on 14/07/2024.
+//  Created by Ai Hawok on 17/07/2024.
 //
 
 import UIKit
 import SnapKit
 
-class CategoryCell: UICollectionViewCell {
-    static let reuseIdentifier = "CategoryCell"
-    
-    private let titleLabel = UILabel()
-    
+class CategoryNameCell: UICollectionViewCell {
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = Constants.Fonts.categoryName
+        label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -29,6 +33,6 @@ class CategoryCell: UICollectionViewCell {
     
     func configure(with category: CategoryModel, isSelected: Bool) {
         titleLabel.text = category.name
-        titleLabel.textColor = isSelected ? .red : .black // Change color based on selection
+        titleLabel.textColor = isSelected ? .label : .secondaryLabel
     }
 }

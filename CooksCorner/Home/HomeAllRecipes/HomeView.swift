@@ -52,49 +52,47 @@ class HomeView: BaseView {
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.interItemSpacing = .fixed(10)
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44))
+        
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: HeaderView.sectionHeaderElementKind,
+            alignment: .top)
+        
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: padding, bottom: 5, trailing: padding)
+        section.boundarySupplementaryItems = [sectionHeader]
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 5,
+            leading: 0,
+            bottom: 5,
+            trailing: padding
+        )
         section.interGroupSpacing = interGroupSpacing
         section.orthogonalScrollingBehavior = .continuous
         
         return section
     }
     
-    //    private func foodRecipeSection() -> NSCollectionLayoutSection {
-    //            let itemSize = NSCollectionLayoutSize(
-    //                widthDimension: .fractionalWidth(1.0),
-    //                heightDimension: .fractionalHeight(1.0)
-    //            )
-    //            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-    //            
-    //            let groupSize = NSCollectionLayoutSize(
-    //                widthDimension: .fractionalWidth(1.0),
-    //                heightDimension: .fractionalHeight(1.0)
-    //            )
-    //            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-    //            
-    //            let section = NSCollectionLayoutSection(group: group)
-    //            section.orthogonalScrollingBehavior = .groupPaging
-    //            
-    //            return section
-    //        }
-    
     private func foodRecipeSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.5),
-            heightDimension: .fractionalHeight(1.0)
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.5)
+            heightDimension: .fractionalHeight(1)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.interItemSpacing = .fixed(10)
+        
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = CGFloat(10)
-        section.orthogonalScrollingBehavior = .groupPaging
+        section.orthogonalScrollingBehavior = .groupPagingCentered
         
         return section
     }

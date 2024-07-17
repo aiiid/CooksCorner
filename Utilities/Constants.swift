@@ -32,7 +32,16 @@ class Constants {
         static let regular = UIFont(name: "Poppins-Regular", size: 24)!
         static let light = UIFont(name: "Poppins-Light", size: 24)!
         static let bold = UIFont(name: "Poppins-Bold", size: 24)!
+        static let semibold = UIFont(name: "Poppins-Semibold", size: 24)!
+        
         static let small = UIFont(name: "Poppins-Regular", size: 14)!
+        
+        static let recipeTitle = UIFont(name: "Poppins-SemiBold", size: 16)!
+        static let recipeAuthor = UIFont(name: "Poppins-Regular", size: 15)!
+        
+        static let categoryName = UIFont(name: "Poppins-Regular", size: 14)!
+
+        
     }
     
     struct Texts {
