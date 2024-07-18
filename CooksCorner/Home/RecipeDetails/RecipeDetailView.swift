@@ -9,7 +9,7 @@ import SnapKit
 
 class RecipeDetailView: UIView {
     
-    let mainImage: UIImageView = {
+    private let mainImage: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 25
         imageView.contentMode = .scaleAspectFill
@@ -17,91 +17,47 @@ class RecipeDetailView: UIView {
         return imageView
     }()
     
-    let gradientLayer: CAGradientLayer = {
+    private let gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         layer.colors = [UIColor.black.withAlphaComponent(0.7).cgColor, UIColor.clear.cgColor]
         layer.locations = [0.0, 1.0]
         return layer
     }()
     
-    let infoView: UIView = {
+    private let infoView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 25
         view.backgroundColor = .white
         return view
     }()
     
-    let titleText: UILabel = {
+    private let titleLabel: UILabel = {
         let text = UILabel()
-        text.font = Constants.Fonts.recipeTitle
-        text.textColor = .label
+        text.font = Constants.Fonts.semiboldTitle
+        text.textColor = Constants.Colors.label
         text.numberOfLines = 0
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
     
-    let timeText: UILabel = {
+   
+    private var cookingTime = CookingTimeView()
+    private var difficultyLevel = DifficultyLevelView(level: .medium)
+    private var descriptionText = DescriptionView()
+    private var likesAndBookmark = LikesAndBookmarkView()
+    
+    let authorLabelButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = Constants.Fonts.regularText
+        button.setTitleColor(Constants.Colors.gray, for: .normal)
+        return button
+    }()
+    
+    private let ingridientsLabel: UILabel = {
         let text = UILabel()
-        text.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        text.text = "20-30 min"
-        text.numberOfLines = 0
-        text.translatesAutoresizingMaskIntoConstraints = false
-        return text
-    }()
-    
-    let timeIcon: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(systemName: "timer")
-        image.tintColor = .label
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    
-    let descriptionLabel: UILabel = {
-        let text = UILabel()
-        text.font = UIFont(name: "SFProText-Semibold", size: 20)
-        text.text = "Description"
-        text.numberOfLines = 0
-        text.translatesAutoresizingMaskIntoConstraints = false
-        return text
-    }()
-    
-    let descriptionText: UILabel = {
-        let text = UILabel()
-        text.font = UIFont(name: "SFProDisplay-Regular", size: 16)
-        text.numberOfLines = 0
-        text.translatesAutoresizingMaskIntoConstraints = false
-        return text
-    }()
-    
-    let titleStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 5
-        stackView.distribution = .equalSpacing
-        return stackView
-    }()
-    
-    let timeStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 8
-        stackView.distribution = .equalSpacing
-        return stackView
-    }()
-    
-    let descriptionStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 5
-        stackView.distribution = .equalSpacing
-        return stackView
-    }()
-    
-    let reviewsLabel: UILabel = {
-        let text = UILabel()
-        text.font = UIFont(name: "SFProText-Semibold", size: 20)
+        text.font = Constants.Fonts.recipeDescriptionTitle
         text.text = "Reviews"
+        text.textColor = Constants.Colors.label
         text.numberOfLines = 0
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
@@ -109,8 +65,6 @@ class RecipeDetailView: UIView {
     
     let ingredientsTableView: UITableView = {
         let tableView = UITableView()
-        tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
     
@@ -124,9 +78,9 @@ class RecipeDetailView: UIView {
     }
     
     func set(recipe: RecipeModel) {
-        titleText.text = recipe.name
-        descriptionText.text = recipe.name + " description should go here"
+        titleLabel.text = recipe.name
         mainImage.image = UIImage(named: recipe.thumbnail)
+        authorLabelButton.setTitle("Author", for: .normal)
     }
     
     private func setupView() {
@@ -159,51 +113,63 @@ class RecipeDetailView: UIView {
     }
     
     private func setupInfoView() {
-        [timeIcon, timeText].forEach { timeStack.addArrangedSubview($0) }
-        [titleText, timeStack].forEach { titleStack.addArrangedSubview($0) }
-        [descriptionLabel, descriptionText].forEach { descriptionStack.addArrangedSubview($0) }
-        
+
         [
-            titleStack,
-            timeStack,
-            descriptionStack,
-            reviewsLabel,
+            titleLabel,
+            cookingTime,
+            difficultyLevel,
+            authorLabelButton,
+            likesAndBookmark,
+            descriptionText,
+            ingridientsLabel,
             ingredientsTableView
         ].forEach { infoView.addSubview($0) }
         
+        let padding = Constants.Padding.large
+        let offsetSmall = Constants.Padding.small/2
+        let offsetRegular = Constants.Padding.small
+        
+        titleLabel.snp.makeConstraints { make in
+            make.leading.top.equalToSuperview().inset(padding)
+        }
+        
+        cookingTime.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(offsetSmall)
+            make.leading.equalToSuperview().inset(padding)
+            make.height.equalTo(22)
+        }
+        
+        difficultyLevel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(padding)
+            make.top.equalTo(cookingTime.snp.bottom).offset(offsetSmall)
+        }
+        
+        authorLabelButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(padding)
+            make.top.equalTo(difficultyLevel.snp.bottom).offset(offsetSmall)
+            make.height.equalTo(22)
+        }
+        
+        likesAndBookmark.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(padding)
+            make.top.equalTo(authorLabelButton.snp.bottom).offset(offsetRegular)
+            make.height.equalTo(25)
+        }
+        
         descriptionText.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(padding)
+            make.top.equalTo(likesAndBookmark.snp.bottom).offset(offsetRegular)
         }
-        
-        timeIcon.snp.makeConstraints { make in
-            make.width.height.equalTo(16)
-        }
-        
-        titleStack.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
-            make.width.equalToSuperview()
-            make.leading.equalToSuperview().inset(16)
-            make.width.equalToSuperview()
-        }
-        
-        timeStack.snp.makeConstraints { make in
-            make.top.equalTo(titleStack.snp.bottom).offset(12)
-            make.leading.equalToSuperview().inset(16)
-        }
-        
-        descriptionStack.snp.makeConstraints { make in
-            make.top.equalTo(timeStack.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview().inset(16)
-        }
-        
-        reviewsLabel.snp.makeConstraints { make in
-            make.top.equalTo(descriptionStack.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview().inset(16)
+    
+        ingridientsLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(padding)
+            make.top.equalTo(descriptionText.snp.bottom).offset(offsetRegular)
         }
         
         ingredientsTableView.snp.makeConstraints { make in
-            make.top.equalTo(reviewsLabel.snp.bottom).offset(12)
-            make.leading.trailing.bottom.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(padding)
+            make.top.equalTo(ingridientsLabel.snp.bottom).offset(offsetSmall)
+            make.bottom.equalToSuperview().inset(padding)
         }
     }
 }

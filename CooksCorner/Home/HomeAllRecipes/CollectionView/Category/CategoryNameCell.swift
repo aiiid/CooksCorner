@@ -11,7 +11,7 @@ import SnapKit
 class CategoryNameCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = Constants.Fonts.categoryName
+        label.font = Constants.Fonts.regularText
         label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

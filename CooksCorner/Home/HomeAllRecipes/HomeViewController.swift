@@ -17,7 +17,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Home"
         setupDataSource()
         registerCells()
     }
@@ -46,8 +45,8 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: CategoryRecipeCellDelegate {
     func didSelectRecipe(_ recipe: RecipeModel) {
-        let detailVC = RecipeDetailViewController(recipe: recipe)
-        navigationController?.pushViewController(detailVC, animated: true)
+        let detailViewController = RecipeDetailViewController(recipe: recipe)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 

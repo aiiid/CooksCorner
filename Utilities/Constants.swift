@@ -9,11 +9,16 @@ import UIKit
 
 class Constants {
     struct Colors {
-        static let primary = UIColor(hex: "#FA9E31")
         static let backgroundColor = UIColor.systemBackground
-        static let green = UIColor(hex: "#1BA228")
+        static let primary = UIColor(hex: "#FA9E31")
+        static let secondary = UIColor(hex: "#FFF6DE")
+        
         static let gray: UIColor = .systemGray3
-        static let textColor = UIColor.label
+        
+        static let label = UIColor(hex: "#343434")
+        static let textFaded = UIColor(hex: "#666666")
+       
+        
     }
     
     struct Padding {
@@ -26,6 +31,8 @@ class Constants {
         static let textFieldHeight: CGFloat = 45
         static let mainTextWidth = 250
         static let cornerRadius = 23
+        static let recipeCellWidth = 169
+        static let recipeCellHeight = 209
     }
     
     struct Fonts {
@@ -34,14 +41,18 @@ class Constants {
         static let bold = UIFont(name: "Poppins-Bold", size: 24)!
         static let semibold = UIFont(name: "Poppins-Semibold", size: 24)!
         
-        static let small = UIFont(name: "Poppins-Regular", size: 14)!
+        static let smallText = UIFont(name: "Poppins-Regular", size: 14)!
         
-        static let recipeTitle = UIFont(name: "Poppins-SemiBold", size: 16)!
-        static let recipeAuthor = UIFont(name: "Poppins-Regular", size: 15)!
+        static let recipeCellTitle = UIFont(name: "Poppins-SemiBold", size: 16)!
+        static let recipeCellAuthor = UIFont(name: "Poppins-Regular", size: 15)!
         
-        static let categoryName = UIFont(name: "Poppins-Regular", size: 14)!
-
+        static let regularText = UIFont(name: "Poppins-Regular", size: 14)!
+        static let boldText = UIFont(name: "Poppins-Bold", size: 16)!
+        static let semiboldText = UIFont(name: "Poppins-SemiBold", size: 16)!
         
+        static let semiboldTitle = UIFont(name: "Poppins-SemiBold", size: 20)!
+        static let recipeDescriptionTitle  = UIFont(name: "Poppins-SemiBold", size: 16)!
+         
     }
     
     struct Texts {

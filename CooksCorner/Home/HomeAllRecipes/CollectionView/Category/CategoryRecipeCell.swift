@@ -79,6 +79,8 @@ extension CategoryRecipeCell: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding = Constants.Padding.medium
         let collectionViewSize = collectionView.frame.size.width - padding
-        return CGSize(width: collectionViewSize / 2, height: collectionViewSize / 1.5)
+        let itemWidth = (collectionViewSize - padding) / 2
+        let itemHeight = (collectionViewSize - padding) / 1.5
+        return CGSize(width: itemWidth, height: itemHeight)
     }
 }

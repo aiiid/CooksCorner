@@ -27,7 +27,7 @@ class SplashView: UIView {
     
     let versionLabel: UILabel = {
         var text = UILabel()
-        text.font = Constants.Fonts.small
+        text.font = Constants.Fonts.smallText
         text.textColor = .white
         text.textAlignment = .center
         return text

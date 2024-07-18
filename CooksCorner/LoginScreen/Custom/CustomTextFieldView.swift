@@ -10,7 +10,7 @@ import UIKit
 class CustomTextFieldView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = Constants.Fonts.small
+        label.font = Constants.Fonts.smallText
         label.textColor = Constants.Colors.primary
         return label
     }()

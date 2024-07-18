@@ -13,7 +13,6 @@ class RecipeStatsView: UIView {
         stackView.axis = .horizontal
         stackView.spacing = 2
         stackView.alignment = .leading
-        stackView.distribution = .equalSpacing
         return stackView
     }()
     
@@ -27,7 +26,7 @@ class RecipeStatsView: UIView {
     private let likedLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = Constants.Fonts.small
+        label.font = Constants.Fonts.smallText
         label.textAlignment = .left
         return label
     }()
@@ -42,7 +41,7 @@ class RecipeStatsView: UIView {
     private let savedLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = Constants.Fonts.small
+        label.font = Constants.Fonts.smallText
         label.textAlignment = .left
         return label
     }()
@@ -61,14 +60,14 @@ class RecipeStatsView: UIView {
         [heartIcon, likedLabel, saveIcon, savedLabel].forEach { iconStack.addArrangedSubview($0) }
         
         heartIcon.snp.makeConstraints { make in
-            make.height.width.equalTo(28)
+            make.height.width.equalTo(20)
         }
         saveIcon.snp.makeConstraints { make in
-            make.height.width.equalTo(28)
+            make.height.width.equalTo(20)
         }
         
         iconStack.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.trailing.top.equalToSuperview()
         }
     }
     

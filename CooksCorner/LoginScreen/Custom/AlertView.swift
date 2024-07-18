@@ -15,7 +15,7 @@ class AlertView: UIView {
         message.translatesAutoresizingMaskIntoConstraints = false
         message.textColor = .red
         message.textAlignment = .center
-        message.font = Constants.Fonts.small
+        message.font = Constants.Fonts.smallText
         return message
     }()
     

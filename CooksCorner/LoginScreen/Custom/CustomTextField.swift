@@ -49,7 +49,7 @@ class CustomTextField: UITextField {
     private func configurePlaceholder() {
         let placeholderAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.lightGray,
-            .font: Constants.Fonts.small
+            .font: Constants.Fonts.smallText
         ]
         attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: placeholderAttributes)
     }

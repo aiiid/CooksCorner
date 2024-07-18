@@ -21,7 +21,7 @@ class RecipeCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = Constants.Fonts.recipeTitle
+        label.font = Constants.Fonts.recipeCellTitle
         label.textAlignment = .left
         return label
     }()
@@ -29,7 +29,7 @@ class RecipeCell: UICollectionViewCell {
     private let authorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = Constants.Fonts.small
+        label.font = Constants.Fonts.smallText
         label.textAlignment = .left
         return label
     }()
@@ -66,12 +66,12 @@ class RecipeCell: UICollectionViewCell {
         recipeStats.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.height.equalTo(20)
-            make.width.equalTo(30)
         }
+        
         contentStack.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(Constants.Padding.medium/2)
             make.leading.equalToSuperview().inset(Constants.Padding.small/2)
-            make.trailing.equalToSuperview().inset(Constants.Padding.large)
+//            make.trailing.equalToSuperview().inset(Constants.Padding.large)
         }
     }
     

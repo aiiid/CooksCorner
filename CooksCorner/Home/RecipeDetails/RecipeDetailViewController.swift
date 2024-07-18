@@ -28,24 +28,42 @@ class RecipeDetailViewController: UIViewController {
         super.viewDidLoad()
         detailView.set(recipe: recipe)
         setupDataSource()
+        setupTargets()
     }
     
     private func setupDataSource() {
         detailView.ingredientsTableView.dataSource = self
         detailView.ingredientsTableView.delegate = self
-        detailView.ingredientsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "basicStyle")
+        detailView.ingredientsTableView.register(IngridientCell.self, forCellReuseIdentifier: IngridientCell.reuseIdentifier)
+    }
+    
+    private func setupTargets() {
+        detailView.authorLabelButton.addTarget(self, action: #selector(authorTapped), for: .touchUpInside)
+    }
+    
+    @objc private func authorTapped() {
+        let authourProfileViewController = AuthorProfileViewController()
+        navigationController?.pushViewController(authourProfileViewController, animated: true)
     }
 }
 
 extension RecipeDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5 // Replace with actual number of ingredients
+        return 5 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "basicStyle", for: indexPath)
-        cell.textLabel?.text = "Ingredient \(indexPath.row + 1)" // Replace with actual ingredient data
-        cell.accessoryType = .checkmark
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: IngridientCell.reuseIdentifier, for: indexPath) as? IngridientCell else {
+                  return UITableViewCell()
+              }
+       
+        cell.configure(title: "onion", detail: "1/3")
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 45
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
 }
