@@ -71,7 +71,7 @@ class BaseView: UIView {
         mainCollectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(Constants.Padding.medium)
             make.top.equalTo(headerContainer.snp.bottom).offset(20)
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide)
         }
         
         mainCollectionView.register(

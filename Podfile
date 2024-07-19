@@ -9,5 +9,7 @@ target 'CooksCorner' do
 	pod 'SwiftLint'
 	pod 'SnapKit'
 	pod 'Alamofire', '~> 5.4'
+	pod 'Moya'
+	pod 'Kingfisher', '~> 7.0'
 
 end

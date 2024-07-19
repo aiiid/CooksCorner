@@ -56,6 +56,10 @@
 		E2CF9EEF2C495B8300264734 /* AuthorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9EEE2C495B8300264734 /* AuthorProfileViewController.swift */; };
 		E2CF9EF12C495BA800264734 /* AuthorProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9EF02C495BA800264734 /* AuthorProfileViewModel.swift */; };
 		E2CF9EF42C495DDF00264734 /* ProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9EF32C495DDF00264734 /* ProfileInfoView.swift */; };
+		E2CF9EFA2C4A75A500264734 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9EF92C4A75A500264734 /* NetworkManager.swift */; };
+		E2CF9EFC2C4A77E900264734 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9EFB2C4A77E900264734 /* APIService.swift */; };
+		E2CF9F002C4A799700264734 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9EFF2C4A799700264734 /* LoginResponse.swift */; };
+		E2CF9F042C4A7D0F00264734 /* BaseAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9F032C4A7D0F00264734 /* BaseAuthView.swift */; };
 		ED4AD722358501AF0BB89D2A /* Pods_CooksCorner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E0775CC97834A8A677E860 /* Pods_CooksCorner.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +118,10 @@
 		E2CF9EEE2C495B8300264734 /* AuthorProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorProfileViewController.swift; sourceTree = "<group>"; };
 		E2CF9EF02C495BA800264734 /* AuthorProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorProfileViewModel.swift; sourceTree = "<group>"; };
 		E2CF9EF32C495DDF00264734 /* ProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoView.swift; sourceTree = "<group>"; };
+		E2CF9EF92C4A75A500264734 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E2CF9EFB2C4A77E900264734 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		E2CF9EFF2C4A799700264734 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		E2CF9F032C4A7D0F00264734 /* BaseAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAuthView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,8 +268,8 @@
 			isa = PBXGroup;
 			children = (
 				E2C129632C3C236D00058C2C /* SplashScreen */,
-				E2C129712C3C428300058C2C /* LoginScreen */,
-				E2A1AE5A2C3E51D000EC863A /* RegistrationScreen */,
+				E2CF9EFE2C4A798600264734 /* Networking */,
+				E2CF9F012C4A7CE300264734 /* AuthScreen */,
 				E29169342C41415400E3861D /* TabBarController.swift */,
 				E291692B2C4140CD00E3861D /* Home */,
 				E291692C2C4140E300E3861D /* Search */,
@@ -317,7 +325,6 @@
 		E2C129712C3C428300058C2C /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
-				E2C129722C3C429B00058C2C /* Custom */,
 				E2C129752C3C42BD00058C2C /* LoginView.swift */,
 				E2C129772C3C42D400058C2C /* LoginViewController.swift */,
 				E2C129792C3C430300058C2C /* LoginViewModel.swift */,
@@ -362,6 +369,43 @@
 				E2CF9EF32C495DDF00264734 /* ProfileInfoView.swift */,
 			);
 			path = Custom;
+			sourceTree = "<group>";
+		};
+		E2CF9EF82C4A74AE00264734 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				E2CF9EF92C4A75A500264734 /* NetworkManager.swift */,
+				E2CF9EFB2C4A77E900264734 /* APIService.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		E2CF9EFD2C4A798200264734 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E2CF9EFF2C4A799700264734 /* LoginResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E2CF9EFE2C4A798600264734 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				E2CF9EFD2C4A798200264734 /* Model */,
+				E2CF9EF82C4A74AE00264734 /* NetworkManager */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		E2CF9F012C4A7CE300264734 /* AuthScreen */ = {
+			isa = PBXGroup;
+			children = (
+				E2C129722C3C429B00058C2C /* Custom */,
+				E2C129712C3C428300058C2C /* LoginScreen */,
+				E2A1AE5A2C3E51D000EC863A /* RegistrationScreen */,
+				E2CF9F032C4A7D0F00264734 /* BaseAuthView.swift */,
+			);
+			path = AuthScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -484,8 +528,10 @@
 			files = (
 				E2CF9EF42C495DDF00264734 /* ProfileInfoView.swift in Sources */,
 				E2CF9EEB2C49496200264734 /* ProfileModel.swift in Sources */,
+				E2CF9F002C4A799700264734 /* LoginResponse.swift in Sources */,
 				E2C129512C3C22D600058C2C /* ViewController.swift in Sources */,
 				E291694E2C47D6C000E3861D /* RecipeDetailView.swift in Sources */,
+				E2CF9EFA2C4A75A500264734 /* NetworkManager.swift in Sources */,
 				E29169522C47E3C400E3861D /* IngridientCell.swift in Sources */,
 				E2CF9EE52C4933D400264734 /* DescriptionView.swift in Sources */,
 				E2CF9EEF2C495B8300264734 /* AuthorProfileViewController.swift in Sources */,
@@ -497,6 +543,7 @@
 				E2CF9EE02C492E6D00264734 /* LikesAndBookmarkView.swift in Sources */,
 				E2A1AE5C2C3E51EF00EC863A /* RegistrationView.swift in Sources */,
 				E2CF9EF12C495BA800264734 /* AuthorProfileViewModel.swift in Sources */,
+				E2CF9EFC2C4A77E900264734 /* APIService.swift in Sources */,
 				E291693E2C414E7300E3861D /* RecipeModel.swift in Sources */,
 				E29169442C43FA4900E3861D /* BaseView.swift in Sources */,
 				E2A1AE5E2C3E634000EC863A /* RegistrationViewController.swift in Sources */,
@@ -517,6 +564,7 @@
 				E29169312C41412100E3861D /* SearchViewController.swift in Sources */,
 				E2CF9EDE2C492DFD00264734 /* DifficultyLevelView.swift in Sources */,
 				E29169372C41467F00E3861D /* HomeView.swift in Sources */,
+				E2CF9F042C4A7D0F00264734 /* BaseAuthView.swift in Sources */,
 				E2C129622C3C236700058C2C /* SplashScreenView.swift in Sources */,
 				E291693A2C41493E00E3861D /* RecipeCell.swift in Sources */,
 				E29169482C47BC8300E3861D /* CategoryNameCell.swift in Sources */,
