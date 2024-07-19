@@ -5,7 +5,7 @@
 //  Created by Ai Hawok on 12/07/2024.
 //
 
-//import SDWebImage
+import Kingfisher
 import UIKit
 
 class RecipeCell: UICollectionViewCell {
@@ -76,16 +76,20 @@ class RecipeCell: UICollectionViewCell {
     }
     
     public func configure(with recipe: RecipeModel) {
-        titleLabel.text = recipe.name
+        titleLabel.text = recipe.title
         authorLabel.text = recipe.author
-        recipeStats.configure(likes: recipe.likes, saves: recipe.saves)
-        imageView.image = UIImage(named: recipe.thumbnail)
-//
-//        if let imageURL = URL(string: recipe.thumbnail) {
-////            imageView.sd_setImage(with: imageURL, completed: nil)
-//            print("should be")
-//        } else {
-//            imageView.image = nil // Set a placeholder image if needed
-//        }
+        recipeStats.configure(likes: recipe.likesAmount, saves: recipe.bookmarksAmount)
+//        imageView.image = UIImage(named: recipe.imageUrl)
+
+        var imageUrlString = recipe.imageUrl
+               if imageUrlString.starts(with: "http://") {
+                   imageUrlString = "https://" + imageUrlString.dropFirst(7)
+               }
+        
+        if let imageURL = URL(string: imageUrlString) {
+                    imageView.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
+                } else {
+                    imageView.image = UIImage(named: "placeholder")
+                }
     }
 }

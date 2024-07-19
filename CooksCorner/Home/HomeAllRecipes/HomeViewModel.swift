@@ -8,23 +8,40 @@
 import Foundation
 
 class HomeViewModel {
-    let categories: [CategoryModel] = [
-        CategoryModel(name: "Breakfast", recipes: [
-            RecipeModel(name: "Egg Omlet", author: "Ainsley Harriott", thumbnail: "placeholder.jpg", likes: 118, saves: 118),
-            RecipeModel(name: "Pancakes", author: "Jamie Oliver", thumbnail: "placeholder.jpg", likes: 200, saves: 150),
-            RecipeModel(name: "Pancakes", author: "Jamie Oliver", thumbnail: "placeholder.jpg", likes: 200, saves: 150),
-            RecipeModel(name: "Pancakes", author: "Jamie Oliver", thumbnail: "placeholder.jpg", likes: 200, saves: 150),
-            RecipeModel(name: "Pancakes", author: "Jamie Oliver", thumbnail: "placeholder.jpg", likes: 200, saves: 150)
-        ]),
-        CategoryModel(name: "Lunch", recipes: [
-            RecipeModel(name: "Chicken Burger", author: "Ainsley Harriott", thumbnail: "placeholder.jpg", likes: 118, saves: 118),
-            RecipeModel(name: "Salad", author: "Gordon Ramsay", thumbnail: "placeholder.jpg", likes: 180, saves: 140)
-        ]),
-        CategoryModel(name: "Dinner", recipes: [
-            RecipeModel(name: "Onion Pizza", author: "Ainsley Harriott", thumbnail: "placeholder.jpg", likes: 118, saves: 118),
-            RecipeModel(name: "Steak", author: "Nigella Lawson", thumbnail: "placeholder.jpg", likes: 250, saves: 200)
-        ])
-    ]
+    var categories: [CategoryModel] = []
+    
+//    var showAlert: ((String) -> Void)?
+    var updateUI: (() -> Void)?
+    
+    
+    func fetchRecipes() {
+        let categoriesToFetch = ["BREAKFAST", "LUNCH", "DINNER"]
+        let group = DispatchGroup()
+        
+        var fetchedCategories: [CategoryModel] = []
+        
+        for category in categoriesToFetch {
+            group.enter()
+            print("Fetching recipes for category: \(category)")
+            NetworkManager.shared.getRecipesByCategory(category: category) { [weak self] result in
+                switch result {
+                case .success(let recipes):
+                    let categoryModel = CategoryModel(name: category, recipes: recipes)
+                    fetchedCategories.append(categoryModel)
+                case .failure(let error):
+                    //self?.showAlert?("Failed to fetch \(category) recipes: \(error.localizedDescription)")
+                    print("Failed to fetch \(category) recipes: \(error.localizedDescription)")
+                }
+                group.leave()
+            }
+        }
+        group.notify(queue: .main) {
+            self.categories = fetchedCategories
+            self.updateUI?()
+            print("Fetched categories: \(fetchedCategories)")
+        }
+    }
+
     
     var recipes: [RecipeModel] {
         return categories.flatMap { $0.recipes }

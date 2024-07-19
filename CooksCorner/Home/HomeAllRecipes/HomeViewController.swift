@@ -19,6 +19,17 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupDataSource()
         registerCells()
+        bindViewModel()
+        viewModel.fetchRecipes()
+    }
+    
+    private func bindViewModel() {
+        viewModel.updateUI = { [weak self] in
+                    self?.contentView.mainCollectionView.reloadData()
+                }
+//        viewModel.showAlert = { [weak self] message in
+//                    self?.showAlert(message: message)
+//                }
     }
     
     private func setupDataSource() {
@@ -41,6 +52,12 @@ class HomeViewController: UIViewController {
             forCellWithReuseIdentifier: CategoryRecipeCell.reuseIdentifier
         )
     }
+    
+//    private func showAlert(message: String) {
+//            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//            present(alert, animated: true, completion: nil)
+//        }
 }
 
 extension HomeViewController: CategoryRecipeCellDelegate {

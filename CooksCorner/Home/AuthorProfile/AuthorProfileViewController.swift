@@ -23,20 +23,19 @@ class AuthorProfileViewController: UIViewController {
     
     private func setupData() {
             // Dummy data
-            let profile = ProfileModel(
-                name: "Ainsley Harriott",
-                avatarURL: "placeholder.jpg",
-                bio: "Ainsley Denzil Dubriel Harriott MBE is an English chef and television presenter. He is known for his BBC cooking",
-                recipesCount: 29,
-                followersCount: 144,
-                followingCount: 100,
-                recipes: [
-                    RecipeModel(name: "Egg Omlet", author: "Ainsley Harriott", thumbnail: "placeholder.jpg", likes: 118, saves: 118),
-                    RecipeModel(name: "Chicken Burger", author: "Ainsley Harriott", thumbnail: "placeholder.jpg", likes: 118, saves: 118),
-                    RecipeModel(name: "Onion Pizza", author: "Ainsley Harriott", thumbnail: "placeholder.jpg", likes: 118, saves: 118),
-                    RecipeModel(name: "Cheery Pastry", author: "Ainsley Harriott", thumbnail: "placeholder.jpg", likes: 118, saves: 118)
-                ]
-            )
+        let profile = ProfileModel(
+            name: "Mr author",
+            avatarURL: "placeholder.jpg",
+            bio: "Author is aaaa a passionate chef who loves creating delicious dishes with flair.",
+            recipesCount: 29,
+            followersCount: 144,
+            followingCount: 100,
+            recipes: [
+                RecipeModel(id: 1, title: "Egg Omelet", author: "Ainsley Harriott", imageUrl: "https://example.com/image1.jpg", likesAmount: 118, bookmarksAmount: 118),
+                RecipeModel(id: 2, title: "Chicken Burger", author: "Ainsley Harriott", imageUrl: "https://example.com/image2.jpg", likesAmount: 118, bookmarksAmount: 118),
+                RecipeModel(id: 3, title: "Onion Pizza", author: "Ainsley Harriott", imageUrl: "https://example.com/image3.jpg", likesAmount: 118, bookmarksAmount: 118),
+                RecipeModel(id: 4, title: "Cherry Pastry", author: "Ainsley Harriott", imageUrl: "https://example.com/image4.jpg", likesAmount: 118, bookmarksAmount: 118)
+            ])
             
             self.profile = profile
             profileView.set(profile: profile)

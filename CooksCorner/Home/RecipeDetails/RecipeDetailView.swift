@@ -9,7 +9,7 @@ import SnapKit
 
 class RecipeDetailView: UIView {
     
-    private let mainImage: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 25
         imageView.contentMode = .scaleAspectFill
@@ -40,7 +40,7 @@ class RecipeDetailView: UIView {
         return text
     }()
     
-   
+    
     private var cookingTime = CookingTimeView()
     private var difficultyLevel = DifficultyLevelView(level: .medium)
     private var descriptionText = DescriptionView()
@@ -78,19 +78,29 @@ class RecipeDetailView: UIView {
     }
     
     func set(recipe: RecipeModel) {
-        titleLabel.text = recipe.name
-        mainImage.image = UIImage(named: recipe.thumbnail)
-        authorLabelButton.setTitle("Author", for: .normal)
+        titleLabel.text = recipe.title
+        authorLabelButton.setTitle(recipe.author, for: .normal)
+        
+        var imageUrlString = recipe.imageUrl
+               if imageUrlString.starts(with: "http://") {
+                   imageUrlString = "https://" + imageUrlString.dropFirst(7)
+               }
+        
+        if let imageURL = URL(string: imageUrlString) {
+                    imageView.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
+                } else {
+                    imageView.image = UIImage(named: "placeholder")
+                }
     }
     
     private func setupView() {
-        addSubview(mainImage)
-        mainImage.layer.addSublayer(gradientLayer)
+        addSubview(imageView)
+        imageView.layer.addSublayer(gradientLayer)
         addSubview(infoView)
         
         setupInfoView()
         
-        mainImage.snp.makeConstraints { make in
+        imageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.width.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.6)
@@ -113,7 +123,7 @@ class RecipeDetailView: UIView {
     }
     
     private func setupInfoView() {
-
+        
         [
             titleLabel,
             cookingTime,
@@ -160,7 +170,7 @@ class RecipeDetailView: UIView {
             make.leading.trailing.equalToSuperview().inset(padding)
             make.top.equalTo(likesAndBookmark.snp.bottom).offset(offsetRegular)
         }
-    
+        
         ingridientsLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(padding)
             make.top.equalTo(descriptionText.snp.bottom).offset(offsetRegular)

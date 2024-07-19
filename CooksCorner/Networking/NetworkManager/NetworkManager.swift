@@ -62,4 +62,36 @@ class NetworkManager {
                 }
             }
         }
+    
+    func getRecipesByCategory(
+        category: String,
+        completion: @escaping (Result<[RecipeModel], Error>) -> Void
+    ) {
+        let target = APIService.getRecipeByCategory(category: category)
+        print("Request URL: \(target.description)")
+        
+        provider.request(target) { result in
+            switch result {
+            case .success(let response):
+                let responseMessage = String(data: response.data, encoding: .utf8) ?? "Unknown response"
+                print("Response for category \(category): \(responseMessage)")
+                do {
+                    if response.statusCode == 200 {
+                        let recipes = try JSONDecoder().decode([RecipeModel].self, from: response.data)
+                        completion(.success(recipes))
+                    } else {
+                        let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: responseMessage])
+                        print("Error for category \(category): \(responseMessage)")
+                        completion(.failure(error))
+                    }
+                } catch {
+                    print("Decoding error for category \(category): \(error)")
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                print("Request failure for category \(category): \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
 }

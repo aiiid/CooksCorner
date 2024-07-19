@@ -197,7 +197,6 @@
 			children = (
 				E29169392C41493E00E3861D /* RecipeCell.swift */,
 				E291693B2C414B9700E3861D /* RecipeStatsView.swift */,
-				E291693D2C414E7300E3861D /* RecipeModel.swift */,
 			);
 			path = Recipe;
 			sourceTree = "<group>";
@@ -383,6 +382,7 @@
 		E2CF9EFD2C4A798200264734 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E291693D2C414E7300E3861D /* RecipeModel.swift */,
 				E2CF9EFF2C4A799700264734 /* LoginResponse.swift */,
 			);
 			path = Model;

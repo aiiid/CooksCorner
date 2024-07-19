@@ -12,10 +12,11 @@ struct CategoryModel {
     let recipes: [RecipeModel]
 }
 
-struct RecipeModel {
-    let name: String
+struct RecipeModel: Decodable {
+    let id: Int
+    let title: String
     let author: String
-    let thumbnail: String
-    let likes: Int
-    let saves: Int
+    let imageUrl: String
+    let likesAmount: Int
+    let bookmarksAmount: Int
 }

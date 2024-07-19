@@ -10,6 +10,7 @@ import Foundation
 class LoginViewModel {
     
     var showAlert: ((String) -> Void)?
+    var loginSuccess: (() -> Void)?
     
     func validateCredentials(email: String?, password: String?, completion: @escaping (Bool) -> Void) {
         guard let email = email, !email.isEmpty,
@@ -30,7 +31,9 @@ class LoginViewModel {
             switch result {
             case .success(let loginResponse):
                 print("Login succeeded, saving token")
+                print("token:", loginResponse.accessToken)
                 UserDefaults.standard.setValue(loginResponse.accessToken, forKey: "accessToken")
+                self?.loginSuccess?()
                 completion(true)
             case .failure(let error):
                 print("Login failed: \(error.localizedDescription)")
