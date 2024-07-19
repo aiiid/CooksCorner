@@ -94,4 +94,25 @@ class NetworkManager {
             }
         }
     }
+    
+    func getRecipeById(
+            id: Int,
+            completion: @escaping (Result<RecipeModel, Error>) -> Void
+        ) {
+            provider.request(.getRecipeById(id: id)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let recipe = try JSONDecoder().decode(RecipeModel.self, from: response.data)
+                        completion(.success(recipe))
+                    } catch {
+                        let errorMessage = String(data: response.data, encoding: .utf8) ?? "Unknown error"
+                        let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
 }

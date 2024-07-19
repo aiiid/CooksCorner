@@ -12,6 +12,7 @@ enum APIService {
     case login(email: String, password: String)
     case registration(name: String, email: String, password: String)
     case getRecipeByCategory(category: String)
+    case getRecipeById(id: Int)
 }
 
 extension APIService: TargetType {
@@ -27,14 +28,17 @@ extension APIService: TargetType {
             return "/registration"
         case .getRecipeByCategory(let category):
             return "/recipes/by-category/\(category)"
-        }
+        case .getRecipeById(let id):
+                    return "/recipes/\(id)"
+                }
+        
     }
     
     var method: Moya.Method {
         switch self {
         case .login, .registration:
             return .post
-        case .getRecipeByCategory:
+        case .getRecipeByCategory, .getRecipeById:
             return .get
         }
     }
@@ -45,7 +49,7 @@ extension APIService: TargetType {
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .registration(let name, let email, let password):
             return .requestParameters(parameters: ["name": name, "email": email, "password": password], encoding: JSONEncoding.default)
-        case .getRecipeByCategory:
+        case .getRecipeByCategory, .getRecipeById:
             return .requestPlain
         }
     }
@@ -54,7 +58,7 @@ extension APIService: TargetType {
         switch self {
         case .login, .registration:
             return ["Content-type": "application/json"]
-        case .getRecipeByCategory:
+        case .getRecipeByCategory, .getRecipeById:
             if let token = UserDefaults.standard.string(forKey: "accessToken") {
                 return ["Content-type": "application/json",
                         "Authorization": "Bearer \(token)"

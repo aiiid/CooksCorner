@@ -4,7 +4,6 @@
 //
 //  Created by Ai Hawok on 08/07/2024.
 //
-
 import UIKit
 
 class LoginViewController: UIViewController {
@@ -20,7 +19,6 @@ class LoginViewController: UIViewController {
         setupTargets()
         bindModel()
     }
-
     
     private func setupTargets() {
         contentView.signInButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
@@ -34,10 +32,13 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func loginTapped() {
+        contentView.showLoading(true)
+        
         viewModel.validateCredentials(
             email: contentView.emailField.textField.text,
             password: contentView.passwordField.textField.text
-        ){ [weak self] success in
+        ) { [weak self] success in
+            self?.contentView.showLoading(false)
             if success {
                 self?.showHomeScreen()
             }

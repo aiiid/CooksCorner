@@ -4,7 +4,6 @@
 //
 //  Created by Ai Hawok on 08/07/2024.
 //
-
 import UIKit
 import SnapKit
 
@@ -57,6 +56,13 @@ class LoginView: BaseAuthView {
         return button
     }()
     
+    let signInActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.color = .white
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
         
@@ -86,6 +92,7 @@ class LoginView: BaseAuthView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setupView()
     }
     
     private func setupView() {
@@ -94,6 +101,7 @@ class LoginView: BaseAuthView {
         addSubview(headerContainer)
         addSubview(loginContainer)
         addSubview(registerButton)
+        signInButton.addSubview(signInActivityIndicator)
         
         bringSubviewToFront(alertView)
         
@@ -116,6 +124,10 @@ class LoginView: BaseAuthView {
             make.bottom.equalToSuperview().inset(Constants.Padding.large)
             make.leading.trailing.equalToSuperview().inset(Constants.Padding.medium)
             make.height.equalTo(Constants.Size.textFieldHeight)
+        }
+        
+        signInActivityIndicator.snp.makeConstraints { make in
+            make.center.equalTo(signInButton)
         }
     }
     
@@ -149,6 +161,16 @@ class LoginView: BaseAuthView {
             make.top.equalTo(passwordField.snp.bottom).offset(Constants.Padding.large)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(Constants.Size.textFieldHeight)
+        }
+    }
+    
+    func showLoading(_ show: Bool) {
+        if show {
+            signInActivityIndicator.startAnimating()
+            signInButton.setTitle("", for: .normal)
+        } else {
+            signInActivityIndicator.stopAnimating()
+            signInButton.setTitle("Sign in", for: .normal)
         }
     }
 }

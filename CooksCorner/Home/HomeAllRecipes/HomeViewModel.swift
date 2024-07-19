@@ -23,7 +23,7 @@ class HomeViewModel {
         for category in categoriesToFetch {
             group.enter()
             print("Fetching recipes for category: \(category)")
-            NetworkManager.shared.getRecipesByCategory(category: category) { [weak self] result in
+            NetworkManager.shared.getRecipesByCategory(category: category) { result in
                 switch result {
                 case .success(let recipes):
                     let categoryModel = CategoryModel(name: category, recipes: recipes)
@@ -41,6 +41,17 @@ class HomeViewModel {
             print("Fetched categories: \(fetchedCategories)")
         }
     }
+    
+    func fetchRecipeById(id: Int) {
+            NetworkManager.shared.getRecipeById(id: id) { [weak self] result in
+                switch result {
+                case .success(let recipe):
+                    self?.updateRecipeDetails?(recipe)
+                case .failure(let error):
+                    self?.showAlert?("Failed to fetch recipe details: \(error.localizedDescription)")
+                }
+            }
+        }
 
     
     var recipes: [RecipeModel] {

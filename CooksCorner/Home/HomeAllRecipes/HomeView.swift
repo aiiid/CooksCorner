@@ -67,7 +67,7 @@ class HomeView: BaseView {
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 5,
             leading: 0,
-            bottom: 5,
+            bottom: 10,
             trailing: padding
         )
         section.interGroupSpacing = interGroupSpacing
@@ -84,11 +84,11 @@ class HomeView: BaseView {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
+            widthDimension: .fractionalWidth(1),
             heightDimension: .fractionalHeight(1)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .fixed(10)
+        group.interItemSpacing = .fixed(5)
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = CGFloat(10)
