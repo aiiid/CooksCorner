@@ -110,9 +110,11 @@ class RegistrationView: BaseAuthView {
     
     private func setupView() {
         backgroundColor = Constants.Colors.backgroundColor
+        
         addSubview(headerContainer)
         addSubview(registerStackView)
         addSubview(signInButton)
+        
         bringSubviewToFront(alertView)
         
         configureHeaderContainer()

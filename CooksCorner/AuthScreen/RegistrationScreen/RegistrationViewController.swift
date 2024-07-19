@@ -34,9 +34,10 @@ class RegistrationViewController: UIViewController {
             rePassword: contentView.getRePassword()) { result in
                 switch result {
                 case .success(let success):
-                    self.dismiss(animated: true)
-                    //add popup that registration is succedfull?
                     self.contentView.showAlert(message: success, color: UIColor.green.cgColor)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 case .failure(let failure):
                     self.contentView.showAlert(message: failure.localizedDescription)
                     print(failure.localizedDescription)
@@ -45,6 +46,6 @@ class RegistrationViewController: UIViewController {
     }
     
     @objc func signInTapped() {
-        self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
 }

@@ -28,7 +28,8 @@ class RegistrationViewModel {
                 completion(.failure(error))
                 return
             }
-            NetworkManager.shared.register(name: "John Doe", email: "john@example.com", password: "Password123!") { result in
+            print("entered info",username,mail,password)
+            NetworkManager.shared.register(name: username, email: mail, password: password) { result in
                 switch result {
                 case .success(let message):
                     print("Registration successful: \(message)")
