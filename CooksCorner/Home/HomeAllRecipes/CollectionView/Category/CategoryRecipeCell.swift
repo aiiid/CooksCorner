@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+
 protocol CategoryRecipeCellDelegate: AnyObject {
     func didSelectRecipe(_ recipe: RecipeModel)
 }

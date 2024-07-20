@@ -9,10 +9,9 @@ import UIKit
 
 class CookingTimeView: UIView {
     
-    private let timeText: UILabel = {
+    var timeText: UILabel = {
         let text = UILabel()
         text.font = Constants.Fonts.smallText
-        text.text = "20-30 min"
         text.numberOfLines = 0
         text.textColor = Constants.Colors.primary
         text.textAlignment = .left

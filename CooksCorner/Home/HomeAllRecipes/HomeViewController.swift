@@ -62,8 +62,19 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: CategoryRecipeCellDelegate {
     func didSelectRecipe(_ recipe: RecipeModel) {
-        let detailViewController = RecipeDetailViewController(recipe: recipe)
-        navigationController?.pushViewController(detailViewController, animated: true)
+//        let detailViewController = RecipeDetailViewController(recipe: recipe)
+//        navigationController?.pushViewController(detailViewController, animated: true)
+        
+        NetworkManager.shared.getRecipeById(id: recipe.id) { [weak self] result in
+                   switch result {
+                   case .success(let recipeDetail):
+                       let detailViewController = RecipeDetailViewController(recipe: recipeDetail)
+                       self?.navigationController?.pushViewController(detailViewController, animated: true)
+                   case .failure(let error):
+                       print("Failed to fetch recipe details: \(error.localizedDescription)")
+//                       self?.contentView.showAlert(message: "Failed to fetch recipe details: \(error.localizedDescription)")
+                   }
+               }
     }
 }
 

@@ -42,16 +42,16 @@ class HomeViewModel {
         }
     }
     
-    func fetchRecipeById(id: Int) {
-            NetworkManager.shared.getRecipeById(id: id) { [weak self] result in
-                switch result {
-                case .success(let recipe):
-                    self?.updateRecipeDetails?(recipe)
-                case .failure(let error):
-                    self?.showAlert?("Failed to fetch recipe details: \(error.localizedDescription)")
-                }
-            }
-        }
+//    func fetchRecipeById(id: Int) {
+//            NetworkManager.shared.getRecipeById(id: id) { [weak self] result in
+//                switch result {
+//                case .success(let recipe):
+//                    self?.updateRecipeDetails?(recipe)
+//                case .failure(let error):
+//                    self?.showAlert?("Failed to fetch recipe details: \(error.localizedDescription)")
+//                }
+//            }
+//        }
 
     
     var recipes: [RecipeModel] {

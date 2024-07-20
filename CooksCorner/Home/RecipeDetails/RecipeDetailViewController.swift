@@ -9,13 +9,13 @@ import UIKit
 
 class RecipeDetailViewController: UIViewController {
     private let detailView = RecipeDetailView()
-    private let recipe: RecipeModel
+    private let recipe: RecipeDetailModel
     
     override func loadView() {
         view = detailView
     }
     
-    init(recipe: RecipeModel) {
+    init(recipe: RecipeDetailModel) {
         self.recipe = recipe
         super.init(nibName: nil, bundle: nil)
     }
@@ -49,7 +49,7 @@ class RecipeDetailViewController: UIViewController {
 
 extension RecipeDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5 
+        return recipe.ingredients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,7 +57,8 @@ extension RecipeDetailViewController: UITableViewDataSource, UITableViewDelegate
                   return UITableViewCell()
               }
        
-        cell.configure(title: "onion", detail: "1/3")
+        let ingridient = recipe.ingredients[indexPath.row]
+        cell.configure(title: ingridient.ingredientName, detail: "\(ingridient.amount) \(ingridient.measureUnit)")
         return cell
     }
     

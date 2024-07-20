@@ -42,7 +42,7 @@ class RecipeDetailView: UIView {
     
     
     private var cookingTime = CookingTimeView()
-    private var difficultyLevel = DifficultyLevelView(level: .medium)
+    private var difficultyLevel = DifficultyLevelView()
     private var descriptionText = DescriptionView()
     private var likesAndBookmark = LikesAndBookmarkView()
     
@@ -77,9 +77,11 @@ class RecipeDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(recipe: RecipeModel) {
+    func set(recipe: RecipeDetailModel) {
         titleLabel.text = recipe.title
         authorLabelButton.setTitle(recipe.author, for: .normal)
+        cookingTime.timeText.text = "\(recipe.cookingTimeMinutes) mins"
+        difficultyLevel.set(level: recipe.difficulty)
         
         var imageUrlString = recipe.imageUrl
                if imageUrlString.starts(with: "http://") {
@@ -91,6 +93,7 @@ class RecipeDetailView: UIView {
                 } else {
                     imageView.image = UIImage(named: "placeholder")
                 }
+        
     }
     
     private func setupView() {

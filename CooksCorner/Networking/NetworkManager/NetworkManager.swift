@@ -96,23 +96,32 @@ class NetworkManager {
     }
     
     func getRecipeById(
-            id: Int,
-            completion: @escaping (Result<RecipeModel, Error>) -> Void
-        ) {
-            provider.request(.getRecipeById(id: id)) { result in
-                switch result {
-                case .success(let response):
-                    do {
-                        let recipe = try JSONDecoder().decode(RecipeModel.self, from: response.data)
-                        completion(.success(recipe))
-                    } catch {
-                        let errorMessage = String(data: response.data, encoding: .utf8) ?? "Unknown error"
-                        let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
-                        completion(.failure(error))
-                    }
-                case .failure(let error):
+        id: Int,
+        completion: @escaping (Result<RecipeDetailModel, Error>) -> Void
+    ) {
+        provider.request(.getRecipeById(id: id)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    // Print raw response data for debugging
+                    let responseDataString = String(data: response.data, encoding: .utf8) ?? "Unable to convert data to string"
+                    print("Response data: \(responseDataString)")
+                    
+                    let recipe = try JSONDecoder().decode(RecipeDetailModel.self, from: response.data)
+                    completion(.success(recipe))
+                } catch {
+                    // Print error message for debugging
+                    print("Decoding error: \(error.localizedDescription)")
+                    let errorMessage = String(data: response.data, encoding: .utf8) ?? "Unknown error"
+                    let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
                     completion(.failure(error))
                 }
+            case .failure(let error):
+                // Print network error for debugging
+                print("Network error: \(error.localizedDescription)")
+                completion(.failure(error))
             }
         }
+    }
+
 }

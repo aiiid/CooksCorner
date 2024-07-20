@@ -34,7 +34,7 @@ class DifficultyLevelView: UIView {
         return label
     }()
     
-    init(level: DifficultyLevel) {
+    init(level: String = "Easy") {
         super.init(frame: .zero)
         setupView(level: level)
     }
@@ -43,12 +43,16 @@ class DifficultyLevelView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView(level: DifficultyLevel) {
+    func set(level: String) {
+        setupView(level: level)
+    }
+    
+    private func setupView(level: String) {
         backgroundColor = Constants.Colors.secondary
         layer.cornerRadius = 15
         clipsToBounds = true
         
-        label.text = level.text
+        label.text = level
         addSubview(label)
         
         label.snp.makeConstraints { make in
