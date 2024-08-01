@@ -14,6 +14,8 @@ class NetworkManager {
     
     private init(){}
     
+    //MARK: - Login requests
+    
     func login(
         email: String,
         password: String,
@@ -42,26 +44,28 @@ class NetworkManager {
     }
     
     func register(
-            name: String,
-            email: String,
-            password: String,
-            completion: @escaping (Result<String, Error>) -> Void
-        ) {
-            provider.request(.registration(name: name, email: email, password: password)) { result in
-                switch result {
-                case .success(let response):
-                    let responseMessage = String(data: response.data, encoding: .utf8) ?? "Unknown response"
-                    if response.statusCode == 200 {
-                        completion(.success(responseMessage))
-                    } else {
-                        let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: responseMessage])
-                        completion(.failure(error))
-                    }
-                case .failure(let error):
+        name: String,
+        email: String,
+        password: String,
+        completion: @escaping (Result<String, Error>) -> Void
+    ) {
+        provider.request(.registration(name: name, email: email, password: password)) { result in
+            switch result {
+            case .success(let response):
+                let responseMessage = String(data: response.data, encoding: .utf8) ?? "Unknown response"
+                if response.statusCode == 200 {
+                    completion(.success(responseMessage))
+                } else {
+                    let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: responseMessage])
                     completion(.failure(error))
                 }
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
+    }
+    
+    //MARK: - Recipe requests
     
     func getRecipesByCategory(
         category: String,
@@ -103,25 +107,93 @@ class NetworkManager {
             switch result {
             case .success(let response):
                 do {
-                    // Print raw response data for debugging
                     let responseDataString = String(data: response.data, encoding: .utf8) ?? "Unable to convert data to string"
                     print("Response data: \(responseDataString)")
                     
                     let recipe = try JSONDecoder().decode(RecipeDetailModel.self, from: response.data)
                     completion(.success(recipe))
                 } catch {
-                    // Print error message for debugging
                     print("Decoding error: \(error.localizedDescription)")
                     let errorMessage = String(data: response.data, encoding: .utf8) ?? "Unknown error"
                     let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
                     completion(.failure(error))
                 }
             case .failure(let error):
-                // Print network error for debugging
                 print("Network error: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
     }
-
+    
+    func bookMarkRecipe(id: Int, completion: @escaping (Result<String, Error>) -> Void) {
+           provider.request(.bookMarkRecipe(id: id)) { result in
+               switch result {
+               case .success(let response):
+                   let responseMessage = String(data: response.data, encoding: .utf8) ?? "Unknown response"
+                   if response.statusCode == 200 {
+                       completion(.success(responseMessage))
+                   } else {
+                       let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: responseMessage])
+                       completion(.failure(error))
+                   }
+               case .failure(let error):
+                   completion(.failure(error))
+               }
+           }
+       }
+    
+    func likeRecipe(id: Int, completion: @escaping (Result<String, Error>) -> Void) {
+           provider.request(.likeRecipe(id: id)) { result in
+               switch result {
+               case .success(let response):
+                   let responseMessage = String(data: response.data, encoding: .utf8) ?? "Unknown response"
+                   if response.statusCode == 200 {
+                       completion(.success(responseMessage))
+                   } else {
+                       let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: responseMessage])
+                       completion(.failure(error))
+                   }
+               case .failure(let error):
+                   completion(.failure(error))
+               }
+           }
+       }
+    
+    //MARK: - Author requests
+    
+    func searchAuthorByName(name: String, completion: @escaping (Result<[AuthorModel], Error>) -> Void) {
+            provider.request(.searchAuthor(name: name)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let authors = try JSONDecoder().decode([AuthorModel].self, from: response.data)
+                        completion(.success(authors))
+                    } catch {
+                        let errorMessage = String(data: response.data, encoding: .utf8) ?? "Unknown error"
+                        let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    
+    func getAuthorById(id: Int, completion: @escaping (Result<ProfileDetailModel, Error>) -> Void) {
+        provider.request(.getAuthorById(id: id)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let author = try JSONDecoder().decode(ProfileDetailModel.self, from: response.data)
+                    completion(.success(author))
+                } catch {
+                    let errorMessage = String(data: response.data, encoding: .utf8) ?? "Unknown error"
+                    let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

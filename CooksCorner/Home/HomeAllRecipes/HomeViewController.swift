@@ -76,6 +76,36 @@ extension HomeViewController: CategoryRecipeCellDelegate {
                    }
                }
     }
+    
+    private func searchAuthorByName(name: String) {
+            NetworkManager.shared.searchAuthorByName(name: name) { [weak self] result in
+                switch result {
+                case .success(let authors):
+                    guard let author = authors.first else {
+                        // Handle case where no authors are found
+                        print("No authors found")
+                        return
+                    }
+                    self?.fetchAuthorDetails(by: author.id)
+                case .failure(let error):
+                    // Handle the error, possibly show an alert
+                    print("Failed to search author: \(error.localizedDescription)")
+                }
+            }
+        }
+    
+    private func fetchAuthorDetails(by id: Int) {
+        NetworkManager.shared.getAuthorById(id: id) { [weak self] result in
+            switch result {
+            case .success(let authorDetail):
+                let authorProfileViewModel = AuthorProfileViewModel(detailModel: authorDetail)
+                let authorProfileViewController = AuthorProfileViewController(viewModel: authorProfileViewModel)
+                self?.navigationController?.pushViewController(authorProfileViewController, animated: true)
+            case .failure(let error):
+                print("Failed to fetch author details: \(error.localizedDescription)")
+            }
+        }
+    }
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

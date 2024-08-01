@@ -88,7 +88,7 @@ class HomeView: BaseView {
             heightDimension: .fractionalHeight(1)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .fixed(5)
+        group.interItemSpacing = .fixed(10)
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = CGFloat(10)

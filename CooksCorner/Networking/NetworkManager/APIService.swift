@@ -13,6 +13,11 @@ enum APIService {
     case registration(name: String, email: String, password: String)
     case getRecipeByCategory(category: String)
     case getRecipeById(id: Int)
+    case bookMarkRecipe(id: Int)
+    case likeRecipe(id: Int)
+    case searchAuthor(query: String)
+    case getAuthorById(id: Int)
+    case searchAuthor(name: String)
 }
 
 extension APIService: TargetType {
@@ -29,16 +34,23 @@ extension APIService: TargetType {
         case .getRecipeByCategory(let category):
             return "/recipes/by-category/\(category)"
         case .getRecipeById(let id):
-                    return "/recipes/\(id)"
+            return "/recipes/\(id)"
+        case .bookMarkRecipe(let id):
+            return "/recipes/\(id)/bookmark"
+        case .likeRecipe(let id):
+            return "/recipes/\(id)/like"
+        case .searchAuthor:
+            return "/users/search"
+        case .getAuthorById(let id):
+            return "/users/\(id)"
                 }
-        
-    }
+        }
     
     var method: Moya.Method {
         switch self {
-        case .login, .registration:
+        case .login, .registration, .bookMarkRecipe, .likeRecipe:
             return .post
-        case .getRecipeByCategory, .getRecipeById:
+        case .getRecipeByCategory, .getRecipeById, .searchAuthor, .getAuthorById:
             return .get
         }
     }
@@ -49,8 +61,12 @@ extension APIService: TargetType {
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .registration(let name, let email, let password):
             return .requestParameters(parameters: ["name": name, "email": email, "password": password], encoding: JSONEncoding.default)
-        case .getRecipeByCategory, .getRecipeById:
+        case .bookMarkRecipe(let id), .likeRecipe(let id):
             return .requestPlain
+        case .getRecipeByCategory, .getRecipeById, .getAuthorById:
+            return .requestPlain
+        case .searchAuthor(let query):
+            return .requestParameters(parameters: ["query": query], encoding: URLEncoding.queryString)
         }
     }
     
@@ -58,7 +74,7 @@ extension APIService: TargetType {
         switch self {
         case .login, .registration:
             return ["Content-type": "application/json"]
-        case .getRecipeByCategory, .getRecipeById:
+        case .getRecipeByCategory, .getRecipeById, .searchAuthor, .getAuthorById, .bookMarkRecipe, .likeRecipe:
             if let token = UserDefaults.standard.string(forKey: "accessToken") {
                 return ["Content-type": "application/json",
                         "Authorization": "Bearer \(token)"
@@ -73,7 +89,7 @@ extension APIService: TargetType {
     }
     
     var description: String {
-           return "\(method.rawValue) \(baseURL)\(path)"
-       }
+        return "\(method.rawValue) \(baseURL)\(path)"
+    }
 }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct ProfileModel {
     let name: String
     let avatarURL: String
@@ -15,4 +16,16 @@ struct ProfileModel {
     let followersCount: Int
     let followingCount: Int
     let recipes: [RecipeModel]
+}
+
+extension ProfileModel {
+    init(from detailModel: ProfileDetailModel) {
+        self.name = detailModel.name
+        self.avatarURL = detailModel.image_url
+        self.bio = detailModel.bio
+        self.recipesCount = detailModel.recipesAmount
+        self.followersCount = detailModel.followerAmount
+        self.followingCount = detailModel.followingsAmount
+        self.recipes = detailModel.recipes
+    }
 }

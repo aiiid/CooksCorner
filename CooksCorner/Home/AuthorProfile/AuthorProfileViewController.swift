@@ -8,8 +8,17 @@
 import UIKit
 
 class AuthorProfileViewController: UIViewController {
-    private let profileView = ProfileView()
-    private var profile: ProfileModel?
+    private let profileView = AuthorProfileView()
+    private let viewModel: AuthorProfileViewModel
+    
+    init(viewModel: AuthorProfileViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = profileView
@@ -22,24 +31,9 @@ class AuthorProfileViewController: UIViewController {
     }
     
     private func setupData() {
-            // Dummy data
-        let profile = ProfileModel(
-            name: "Mr author",
-            avatarURL: "placeholder.jpg",
-            bio: "Author is aaaa a passionate chef who loves creating delicious dishes with flair.",
-            recipesCount: 29,
-            followersCount: 144,
-            followingCount: 100,
-            recipes: [
-                RecipeModel(id: 1, title: "Egg Omelet", author: "Ainsley Harriott", imageUrl: "https://example.com/image1.jpg", likesAmount: 118, bookmarksAmount: 118),
-                RecipeModel(id: 2, title: "Chicken Burger", author: "Ainsley Harriott", imageUrl: "https://example.com/image2.jpg", likesAmount: 118, bookmarksAmount: 118),
-                RecipeModel(id: 3, title: "Onion Pizza", author: "Ainsley Harriott", imageUrl: "https://example.com/image3.jpg", likesAmount: 118, bookmarksAmount: 118),
-                RecipeModel(id: 4, title: "Cherry Pastry", author: "Ainsley Harriott", imageUrl: "https://example.com/image4.jpg", likesAmount: 118, bookmarksAmount: 118)
-            ])
-            
-            self.profile = profile
-            profileView.set(profile: profile)
-        }
+        profileView.set(profile: viewModel.profile)
+    }
+    
     private func setupCollectionView() {
         profileView.collectionView.dataSource = self
         profileView.collectionView.delegate = self
@@ -48,7 +42,7 @@ class AuthorProfileViewController: UIViewController {
 
 extension AuthorProfileViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return profile?.recipes.count ?? 0
+        return viewModel.numberOfRecipes
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -56,9 +50,8 @@ extension AuthorProfileViewController: UICollectionViewDataSource, UICollectionV
             return UICollectionViewCell()
         }
         
-        if let recipe = profile?.recipes[indexPath.row] {
-            cell.configure(with: recipe)
-        }
+        let recipe = viewModel.recipe(at: indexPath.row)
+        cell.configure(with: recipe)
         return cell
     }
     
@@ -68,5 +61,20 @@ extension AuthorProfileViewController: UICollectionViewDataSource, UICollectionV
         let itemWidth = (collectionViewSize - padding) / 2
         let itemHeight = (collectionViewSize - padding) / 1.6
         return CGSize(width: itemWidth, height: itemHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedID = indexPath.row
+        
+        NetworkManager.shared.getRecipeById(id: selectedID) { [weak self] result in
+                   switch result {
+                   case .success(let recipeDetail):
+                       let detailViewController = RecipeDetailViewController(recipe: recipeDetail)
+                       self?.navigationController?.pushViewController(detailViewController, animated: true)
+                   case .failure(let error):
+                       print("Failed to fetch recipe details: \(error.localizedDescription)")
+//                       self?.contentView.showAlert(message: "Failed to fetch recipe details: \(error.localizedDescription)")
+                   }
+               }
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class DescriptionView: UIView {
     
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let text = UILabel()
         text.font = Constants.Fonts.recipeDescriptionTitle
         text.text = "Description"
@@ -28,7 +28,7 @@ class DescriptionView: UIView {
         return text
     }()
     
-    let descriptionStack: UIStackView = {
+    private let descriptionStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 5

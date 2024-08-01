@@ -44,7 +44,7 @@ class RecipeDetailView: UIView {
     private var cookingTime = CookingTimeView()
     private var difficultyLevel = DifficultyLevelView()
     private var descriptionText = DescriptionView()
-    private var likesAndBookmark = LikesAndBookmarkView()
+    var likesAndBookmark = LikesAndBookmarkView()
     
     let authorLabelButton: UIButton = {
         let button = UIButton()
@@ -81,20 +81,28 @@ class RecipeDetailView: UIView {
         titleLabel.text = recipe.title
         authorLabelButton.setTitle(recipe.author, for: .normal)
         cookingTime.timeText.text = "\(recipe.cookingTimeMinutes) mins"
+        descriptionText.descriptionText.text = recipe.description
         difficultyLevel.set(level: recipe.difficulty)
         
+        likesAndBookmark.set(
+            likes: recipe.likesAmount,
+            bookMarks: recipe.bookmarksAmount,
+            isBookmarked: recipe.isBookmarked,
+            isLiked: recipe.isLiked
+        )
+        
         var imageUrlString = recipe.imageUrl
-               if imageUrlString.starts(with: "http://") {
-                   imageUrlString = "https://" + imageUrlString.dropFirst(7)
-               }
+        if imageUrlString.starts(with: "http://") {
+            imageUrlString = "https://" + imageUrlString.dropFirst(7)
+        }
         
         if let imageURL = URL(string: imageUrlString) {
-                    imageView.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
-                } else {
-                    imageView.image = UIImage(named: "placeholder")
-                }
-        
+            imageView.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
+        } else {
+            imageView.image = UIImage(named: "placeholder")
+        }
     }
+
     
     private func setupView() {
         addSubview(imageView)

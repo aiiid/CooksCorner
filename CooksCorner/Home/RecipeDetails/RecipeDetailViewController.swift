@@ -9,14 +9,14 @@ import UIKit
 
 class RecipeDetailViewController: UIViewController {
     private let detailView = RecipeDetailView()
-    private let recipe: RecipeDetailModel
+    private let viewModel: RecipeDetailViewModel
     
     override func loadView() {
         view = detailView
     }
     
     init(recipe: RecipeDetailModel) {
-        self.recipe = recipe
+        self.viewModel = RecipeDetailViewModel(recipe: recipe)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,9 +26,11 @@ class RecipeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailView.set(recipe: recipe)
+        detailView.set(recipe: viewModel.recipe)
         setupDataSource()
         setupTargets()
+        setupButtonActions()
+        setupBindings()
     }
     
     private func setupDataSource() {
@@ -41,23 +43,57 @@ class RecipeDetailViewController: UIViewController {
         detailView.authorLabelButton.addTarget(self, action: #selector(authorTapped), for: .touchUpInside)
     }
     
+    private func setupButtonActions() {
+        detailView.likesAndBookmark.onSaveButtonTapped = { [weak self] in
+            self?.bookMarkTapped()
+        }
+        
+        detailView.likesAndBookmark.onLikeButtonTapped = { [weak self] in
+            self?.likeTapped()
+        }
+    }
+    
+    private func setupBindings() {
+        viewModel.onBookmarkStatusChanged = { [weak self] in
+            guard let self = self else { return }
+            self.detailView.set(recipe: self.viewModel.recipe)
+        }
+        
+        viewModel.onAuthorFetched = { [weak self] authorDetail in
+            guard let self = self else { return }
+            let authorProfileViewModel = AuthorProfileViewModel(detailModel: authorDetail)
+            let authorProfileViewController = AuthorProfileViewController(viewModel: authorProfileViewModel)
+            self.navigationController?.pushViewController(authorProfileViewController, animated: true)
+        }
+    }
+    
     @objc private func authorTapped() {
-        let authourProfileViewController = AuthorProfileViewController()
-        navigationController?.pushViewController(authourProfileViewController, animated: true)
+        viewModel.searchAuthorByName()
+    }
+    
+    private func bookMarkTapped() {
+        viewModel.bookmarkRecipe()
+    }
+    
+    private func likeTapped() {
+        viewModel.likeRecipe()
     }
 }
 
 extension RecipeDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipe.ingredients.count
+        return viewModel.recipe.ingredients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: IngridientCell.reuseIdentifier, for: indexPath) as? IngridientCell else {
-                  return UITableViewCell()
-              }
-       
-        let ingridient = recipe.ingredients[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: IngridientCell.reuseIdentifier,
+            for: indexPath
+        ) as? IngridientCell else {
+            return UITableViewCell()
+        }
+        
+        let ingridient = viewModel.recipe.ingredients[indexPath.row]
         cell.configure(title: ingridient.ingredientName, detail: "\(ingridient.amount) \(ingridient.measureUnit)")
         return cell
     }
