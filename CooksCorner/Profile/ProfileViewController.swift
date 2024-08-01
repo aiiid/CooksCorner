@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     private let profileView = ProfileView()
-    private var profile: ProfileModel?
+    private let viewModel = ProfileViewModel()
     
     override func loadView() {
         view = profileView
@@ -17,30 +17,24 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupData()
         setupCollectionView()
         setupTargets()
         setupNavigationBar()
+        setupBindings()
+        viewModel.fetchUserProfile()
     }
     
-    private func setupData() {
-        // Dummy data
-        let profile = ProfileModel(
-            name: "Sarthak Ranja",
-            avatarURL: "placeholder.jpg",
-            bio: "I'm a passionate chef who loves creating delicious dishes with flair.",
-            recipesCount: 29,
-            followersCount: 144,
-            followingCount: 100,
-            recipes: [
-                RecipeModel(id: 1, title: "Egg Omelet", author: "Ainsley Harriott", imageUrl: "https://example.com/image1.jpg", likesAmount: 118, bookmarksAmount: 118),
-                RecipeModel(id: 2, title: "Chicken Burger", author: "Ainsley Harriott", imageUrl: "https://example.com/image2.jpg", likesAmount: 118, bookmarksAmount: 118),
-                RecipeModel(id: 3, title: "Onion Pizza", author: "Ainsley Harriott", imageUrl: "https://example.com/image3.jpg", likesAmount: 118, bookmarksAmount: 118),
-                RecipeModel(id: 4, title: "Cherry Pastry", author: "Ainsley Harriott", imageUrl: "https://example.com/image4.jpg", likesAmount: 118, bookmarksAmount: 118)
-            ])
+    private func setupBindings() {
+        viewModel.onProfileFetched = { [weak self] in
+            guard let self = self else { return }
+            self.profileView.set(profile: self.viewModel.profile!)
+            self.profileView.collectionView.reloadData()
+        }
         
-        self.profile = profile
-        profileView.set(profile: profile)
+        viewModel.onError = { errorMessage in
+            // Handle error, possibly show an alert
+            print("Failed to fetch profile: \(errorMessage)")
+        }
     }
     
     private func setupCollectionView() {
@@ -65,7 +59,6 @@ class ProfileViewController: UIViewController {
         
         let rightBarButtonItem = UIBarButtonItem(customView: logoutButton)
         
-        
         navigationItem.leftBarButtonItem = leftBarButtonItem
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
@@ -78,19 +71,19 @@ class ProfileViewController: UIViewController {
     @objc private func myRecipeButtonTapped() {
         profileView.updateButtonState(isMyRecipeSelected: true)
         // Load my recipes data into collectionView
-        print("savedRecipe")
+        print("My Recipes")
     }
     
     @objc private func savedRecipeButtonTapped() {
         profileView.updateButtonState(isMyRecipeSelected: false)
         // Load saved recipes data into collectionView
-        print("savedRecipe")
+        print("Saved Recipes")
     }
 }
 
 extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return profile?.recipes.count ?? 0
+        return viewModel.numberOfRecipes
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -98,7 +91,7 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
             return UICollectionViewCell()
         }
         
-        if let recipe = profile?.recipes[indexPath.row] {
+        if let recipe = viewModel.recipe(at: indexPath.row) {
             cell.configure(with: recipe)
         }
         return cell

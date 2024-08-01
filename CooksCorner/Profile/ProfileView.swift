@@ -45,7 +45,7 @@ class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(profile: ProfileModel) {
+    func set(profile: ProfileDetailModel) {
         profileInfo.set(profile: profile)
     }
     

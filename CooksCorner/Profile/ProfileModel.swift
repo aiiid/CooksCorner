@@ -21,8 +21,8 @@ struct ProfileModel {
 extension ProfileModel {
     init(from detailModel: ProfileDetailModel) {
         self.name = detailModel.name
-        self.avatarURL = detailModel.image_url
-        self.bio = detailModel.bio
+        self.avatarURL = detailModel.imageUrl ?? "placeholder"
+        self.bio = detailModel.bio ?? "No bio available"
         self.recipesCount = detailModel.recipesAmount
         self.followersCount = detailModel.followerAmount
         self.followingCount = detailModel.followingsAmount

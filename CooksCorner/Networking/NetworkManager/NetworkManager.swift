@@ -64,7 +64,35 @@ class NetworkManager {
             }
         }
     }
+    //MARK: - Profile requests
     
+    func fetchUserProfile(completion: @escaping (Result<ProfileDetailModel, Error>) -> Void) {
+        provider.request(.fetchUserProfile) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let responseDataString = String(data: response.data, encoding: .utf8) ?? "Unable to convert data to string"
+                    print("Response data: \(responseDataString)")
+
+                    let profile = try JSONDecoder().decode(ProfileDetailModel.self, from: response.data)
+                    completion(.success(profile))
+                } catch {
+                    let responseDataString = String(data: response.data, encoding: .utf8) ?? "Unable to convert data to string"
+                    print("Decoding error: \(error.localizedDescription)")
+                    print("Response data: \(responseDataString)")
+                    
+                    let errorMessage = String(data: response.data, encoding: .utf8) ?? "Unknown error"
+                    let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                print("Network error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
+        }
+    }
+
+
     //MARK: - Recipe requests
     
     func getRecipesByCategory(

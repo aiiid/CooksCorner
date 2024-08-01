@@ -11,6 +11,7 @@ import Moya
 enum APIService {
     case login(email: String, password: String)
     case registration(name: String, email: String, password: String)
+    case fetchUserProfile
     case getRecipeByCategory(category: String)
     case getRecipeById(id: Int)
     case bookMarkRecipe(id: Int)
@@ -31,6 +32,8 @@ extension APIService: TargetType {
             return "/login"
         case .registration:
             return "/registration"
+        case .fetchUserProfile:
+            return "/users/me"
         case .getRecipeByCategory(let category):
             return "/recipes/by-category/\(category)"
         case .getRecipeById(let id):
@@ -50,7 +53,7 @@ extension APIService: TargetType {
         switch self {
         case .login, .registration, .bookMarkRecipe, .likeRecipe:
             return .post
-        case .getRecipeByCategory, .getRecipeById, .searchAuthor, .getAuthorById:
+        case .getRecipeByCategory, .getRecipeById, .searchAuthor, .getAuthorById, .fetchUserProfile:
             return .get
         }
     }
@@ -63,7 +66,7 @@ extension APIService: TargetType {
             return .requestParameters(parameters: ["name": name, "email": email, "password": password], encoding: JSONEncoding.default)
         case .bookMarkRecipe(let id), .likeRecipe(let id):
             return .requestPlain
-        case .getRecipeByCategory, .getRecipeById, .getAuthorById:
+        case .getRecipeByCategory, .getRecipeById, .getAuthorById, .fetchUserProfile:
             return .requestPlain
         case .searchAuthor(let query):
             return .requestParameters(parameters: ["query": query], encoding: URLEncoding.queryString)
@@ -74,7 +77,7 @@ extension APIService: TargetType {
         switch self {
         case .login, .registration:
             return ["Content-type": "application/json"]
-        case .getRecipeByCategory, .getRecipeById, .searchAuthor, .getAuthorById, .bookMarkRecipe, .likeRecipe:
+        case .getRecipeByCategory, .getRecipeById, .searchAuthor, .getAuthorById, .bookMarkRecipe, .likeRecipe, .fetchUserProfile:
             if let token = UserDefaults.standard.string(forKey: "accessToken") {
                 return ["Content-type": "application/json",
                         "Authorization": "Bearer \(token)"

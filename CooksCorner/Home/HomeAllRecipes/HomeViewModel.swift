@@ -9,50 +9,32 @@ import Foundation
 
 class HomeViewModel {
     var categories: [CategoryModel] = []
-    
-//    var showAlert: ((String) -> Void)?
     var updateUI: (() -> Void)?
-    
     
     func fetchRecipes() {
         let categoriesToFetch = ["BREAKFAST", "LUNCH", "DINNER"]
-        let group = DispatchGroup()
-        
-        var fetchedCategories: [CategoryModel] = []
-        
-        for category in categoriesToFetch {
-            group.enter()
-            print("Fetching recipes for category: \(category)")
-            NetworkManager.shared.getRecipesByCategory(category: category) { result in
-                switch result {
-                case .success(let recipes):
-                    let categoryModel = CategoryModel(name: category, recipes: recipes)
-                    fetchedCategories.append(categoryModel)
-                case .failure(let error):
-                    //self?.showAlert?("Failed to fetch \(category) recipes: \(error.localizedDescription)")
-                    print("Failed to fetch \(category) recipes: \(error.localizedDescription)")
-                }
-                group.leave()
-            }
-        }
-        group.notify(queue: .main) {
-            self.categories = fetchedCategories
-            self.updateUI?()
-            print("Fetched categories: \(fetchedCategories)")
-        }
+        fetchNextCategory(categories: categoriesToFetch, index: 0)
     }
     
-//    func fetchRecipeById(id: Int) {
-//            NetworkManager.shared.getRecipeById(id: id) { [weak self] result in
-//                switch result {
-//                case .success(let recipe):
-//                    self?.updateRecipeDetails?(recipe)
-//                case .failure(let error):
-//                    self?.showAlert?("Failed to fetch recipe details: \(error.localizedDescription)")
-//                }
-//            }
-//        }
-
+    private func fetchNextCategory(categories: [String], index: Int) {
+        guard index < categories.count else {
+            self.updateUI?()
+            return
+        }
+        
+        let category = categories[index]
+        print("Fetching recipes for category: \(category)")
+        NetworkManager.shared.getRecipesByCategory(category: category) { [weak self] result in
+            switch result {
+            case .success(let recipes):
+                let categoryModel = CategoryModel(name: category, recipes: recipes)
+                self?.categories.append(categoryModel)
+            case .failure(let error):
+                print("Failed to fetch \(category) recipes: \(error.localizedDescription)")
+            }
+            self?.fetchNextCategory(categories: categories, index: index + 1)
+        }
+    }
     
     var recipes: [RecipeModel] {
         return categories.flatMap { $0.recipes }

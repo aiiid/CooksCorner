@@ -5,7 +5,16 @@
 //  Created by Ai Hawok on 18/07/2024.
 //
 
+//
+//  ProfileInfoView.swift
+//  CooksCorner
+//
+//  Created by Ai Hawok on 18/07/2024.
+//
+
 import UIKit
+import SnapKit
+import Kingfisher
 
 class ProfileInfoView: UIView {
     
@@ -52,36 +61,42 @@ class ProfileInfoView: UIView {
     }()
     
     init(
-        profile: ProfileModel = ProfileModel(
+        profile: ProfileDetailModel = ProfileDetailModel(
+            id: 0,
             name: "Default Name",
-            avatarURL: "placeholder",
-            bio: "Default Bio",
-            recipesCount: 0,
-            followersCount: 0,
-            followingCount: 0,
-            recipes: []
+            bio: nil,
+            imageUrl: nil,
+            recipesAmount: 0,
+            recipes: [],
+            followerAmount: 0,
+            followingsAmount: 0,
+            savedRecipes: []
         )
     ) {
-            super.init(frame: .zero)
-            setupUI()
-            set(profile: profile)
-        }
+        super.init(frame: .zero)
+        setupUI()
+        set(profile: profile)
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(profile: ProfileModel) {
-            profileImageView.image = UIImage(named: profile.avatarURL)
-            nameLabel.text = profile.name
-            bioLabel.text = profile.bio
-            
-            statsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-            
-            statsStackView.addArrangedSubview(createStatLabel(count: profile.recipesCount, label: "Recipe"))
-            statsStackView.addArrangedSubview(createStatLabel(count: profile.followersCount, label: "Followers"))
-            statsStackView.addArrangedSubview(createStatLabel(count: profile.followingCount, label: "Following"))
+    func set(profile: ProfileDetailModel) {
+        if let imageUrl = profile.imageUrl, let url = URL(string: imageUrl), imageUrl.starts(with: "http") {
+            profileImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"))
+        } else {
+            profileImageView.image = UIImage(named: "placeholder")
         }
+        nameLabel.text = profile.name
+        bioLabel.text = profile.bio ?? "No bio available"
+        
+        statsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        statsStackView.addArrangedSubview(createStatLabel(count: profile.recipesAmount, label: "Recipes"))
+        statsStackView.addArrangedSubview(createStatLabel(count: profile.followerAmount, label: "Followers"))
+        statsStackView.addArrangedSubview(createStatLabel(count: profile.followingsAmount, label: "Following"))
+    }
     
     private func setupUI() {
         addSubview(profileImageView)
@@ -110,7 +125,7 @@ class ProfileInfoView: UIView {
         }
         
         bioLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(offsetSmall/2)
+            make.top.equalTo(nameLabel.snp.bottom).offset(offsetSmall / 2)
             make.leading.trailing.equalToSuperview()
         }
         

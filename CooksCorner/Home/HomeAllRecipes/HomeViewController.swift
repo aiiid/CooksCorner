@@ -21,15 +21,13 @@ class HomeViewController: UIViewController {
         registerCells()
         bindViewModel()
         viewModel.fetchRecipes()
+        fetchUserProfile()
     }
     
     private func bindViewModel() {
         viewModel.updateUI = { [weak self] in
-                    self?.contentView.mainCollectionView.reloadData()
-                }
-//        viewModel.showAlert = { [weak self] message in
-//                    self?.showAlert(message: message)
-//                }
+            self?.contentView.mainCollectionView.reloadData()
+        }
     }
     
     private func setupDataSource() {
@@ -53,47 +51,47 @@ class HomeViewController: UIViewController {
         )
     }
     
-//    private func showAlert(message: String) {
-//            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            present(alert, animated: true, completion: nil)
-//        }
+    private func fetchUserProfile() {
+        NetworkManager.shared.fetchUserProfile { [weak self] result in
+            switch result {
+            case .success(let profile):
+                print("Profile fetched successfully")
+                // You can store this profile somewhere if needed, e.g., in a singleton or pass to the ProfileViewController
+            case .failure(let error):
+                print("Failed to fetch profile: \(error.localizedDescription)")
+            }
+        }
+    }
 }
 
 extension HomeViewController: CategoryRecipeCellDelegate {
     func didSelectRecipe(_ recipe: RecipeModel) {
-//        let detailViewController = RecipeDetailViewController(recipe: recipe)
-//        navigationController?.pushViewController(detailViewController, animated: true)
-        
         NetworkManager.shared.getRecipeById(id: recipe.id) { [weak self] result in
-                   switch result {
-                   case .success(let recipeDetail):
-                       let detailViewController = RecipeDetailViewController(recipe: recipeDetail)
-                       self?.navigationController?.pushViewController(detailViewController, animated: true)
-                   case .failure(let error):
-                       print("Failed to fetch recipe details: \(error.localizedDescription)")
-//                       self?.contentView.showAlert(message: "Failed to fetch recipe details: \(error.localizedDescription)")
-                   }
-               }
-    }
-    
-    private func searchAuthorByName(name: String) {
-            NetworkManager.shared.searchAuthorByName(name: name) { [weak self] result in
-                switch result {
-                case .success(let authors):
-                    guard let author = authors.first else {
-                        // Handle case where no authors are found
-                        print("No authors found")
-                        return
-                    }
-                    self?.fetchAuthorDetails(by: author.id)
-                case .failure(let error):
-                    // Handle the error, possibly show an alert
-                    print("Failed to search author: \(error.localizedDescription)")
-                }
+            switch result {
+            case .success(let recipeDetail):
+                let detailViewController = RecipeDetailViewController(recipe: recipeDetail)
+                self?.navigationController?.pushViewController(detailViewController, animated: true)
+            case .failure(let error):
+                print("Failed to fetch recipe details: \(error.localizedDescription)")
             }
         }
-    
+    }
+
+    private func searchAuthorByName(name: String) {
+        NetworkManager.shared.searchAuthorByName(name: name) { [weak self] result in
+            switch result {
+            case .success(let authors):
+                guard let author = authors.first else {
+                    print("No authors found")
+                    return
+                }
+                self?.fetchAuthorDetails(by: author.id)
+            case .failure(let error):
+                print("Failed to search author: \(error.localizedDescription)")
+            }
+        }
+    }
+
     private func fetchAuthorDetails(by id: Int) {
         NetworkManager.shared.getAuthorById(id: id) { [weak self] result in
             switch result {
@@ -155,7 +153,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 return UICollectionViewCell()
             }
             let category = viewModel.categories[indexPath.row]
-            cell.delegate = self // Set the delegate
+            cell.delegate = self
             cell.configure(with: category)
             return cell
         }
